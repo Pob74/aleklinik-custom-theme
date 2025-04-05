@@ -3,6 +3,7 @@
 <main class="py-12 lg:py-20">
     <div class="container mx-auto px-6">
         <?php while (have_posts()) : the_post(); ?>
+           
             <article class="max-w-4xl mx-auto">
                 <!-- Post Header -->
                 <header class="mb-12">
