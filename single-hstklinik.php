@@ -1,6 +1,7 @@
 <?php get_header(); ?>
 
-<div class="w-full bg-gray-50 py-8 md:py-12">
+<section class="w-full bg-gray-50 py-8 md:py-12">
+  This is single-hstklinik.php
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col lg:flex-row gap-8">
       <?php if (!get_field('hide_sidebar')): ?>
@@ -31,7 +32,11 @@
                   $is_current = get_the_ID() === get_queried_object_id();
                 ?>
                   <a href="<?php echo $link ?>" 
-                     class="flex items-center px-5 py-3.5 transition-colors duration-200 border-l-4 <?php echo $is_current ? 'border-blue-500 bg-blue-50 text-blue-700 font-medium' : 'border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-blue-600 hover:border-blue-200'; ?>">
+                     class="flex items-center px-5 py-3.5 transition-all duration-200 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 <?php 
+                     echo $is_current 
+                       ? 'bg-blue-50 text-blue-700 font-medium before:bg-blue-500' 
+                       : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600 before:bg-transparent hover:before:bg-blue-200'; 
+                     ?>">
                     <div class="w-4 flex-shrink-0 mr-2">
                       <?php if ($is_current): ?>
                         <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -73,10 +78,14 @@
                   $is_current = get_the_ID() === get_queried_object_id();
                 ?>
                   <a href="<?php echo $link ?>" 
-                     class="flex items-center px-5 py-3.5 transition-colors duration-200 border-l-4 <?php echo $is_current ? 'border-blue-500 bg-blue-50 text-blue-700 font-medium' : 'border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-blue-600 hover:border-blue-200'; ?>">
+                     class="flex items-center px-5 py-3.5 transition-all duration-200 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 <?php 
+                     echo $is_current 
+                       ? 'bg-green-50 text-green-700 font-medium before:bg-green-500' 
+                       : 'text-gray-700 hover:bg-gray-50 hover:text-green-600 before:bg-transparent hover:before:bg-green-200'; 
+                     ?>">
                     <div class="w-4 flex-shrink-0 mr-2">
                       <?php if ($is_current): ?>
-                        <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                           <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                         </svg>
                       <?php endif; ?>
@@ -217,6 +226,6 @@
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <?php get_footer(); ?>

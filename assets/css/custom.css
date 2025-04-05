@@ -14,13 +14,21 @@
   text-decoration: underline;
 }
 
-.main-menu-item {
+/* Sidebar Navigation Styles */
+.sticky aside nav a {
+  position: relative;
+  border-left: 4px solid transparent !important;
+  border-right: 4px solid transparent !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.menu-item-has-children {
   position: relative;
   z-index: 9999;
 }
 
 .menu-item-has-children .sub-menu {
-  display: none !important;
+  display: block !important;
   position: absolute;
   top: 100%;
   left: 0;
@@ -31,17 +39,22 @@
   border-radius: 4px;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  transition-delay: 0.1s;
   transform: translateY(10px);
   border: 1px solid #e5e7eb;
   backdrop-filter: blur(8px);
 }
 
 .menu-item-has-children:hover > .sub-menu {
-  display: block !important;
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+  transition-delay: 0.2s;
+}
+
+.menu-item-has-children > .sub-menu:hover {
+  transition-delay: 0s;
 }
 
 /* Style submenu items */

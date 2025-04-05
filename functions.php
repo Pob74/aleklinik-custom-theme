@@ -10,17 +10,8 @@ if (! defined('ABSPATH'))
 require_once get_template_directory() . '/support/register-post-type.php';
 require_once get_template_directory() . '/support/enqueue.php';
 require_once get_template_directory() . '/support/blocks.php';
+require_once get_template_directory() . '/support/theme-setup.php';
 
-/**
- * Register navigation menus
- */
-function klinik_register_menus() {
-    register_nav_menus(array(
-        'primary_menu' => __('Primary Menu', 'klinik'),
-        'mobile_menu' => __('Mobile Menu', 'klinik')
-    ));
-}
-add_action('init', 'klinik_register_menus');
 
 /**
  * Add custom classes to menu items
