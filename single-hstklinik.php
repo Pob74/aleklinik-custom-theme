@@ -31,13 +31,15 @@
                   $is_current = get_the_ID() === get_queried_object_id();
                 ?>
                   <a href="<?php echo $link ?>" 
-                     class="flex items-center px-5 py-3.5 transition-colors duration-200 <?php echo $is_current ? 'bg-blue-50 text-blue-700 font-medium border-l-4 border-blue-500' : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600 border-l-4 border-transparent'; ?>">
-                    <?php if ($is_current): ?>
-                      <svg class="w-4 h-4 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                      </svg>
-                    <?php endif; ?>
-                    <span class="<?php echo $is_current ? 'ml-0' : 'ml-2'; ?>"><?php echo $title ?></span>
+                     class="flex items-center px-5 py-3.5 transition-colors duration-200 border-l-4 <?php echo $is_current ? 'border-blue-500 bg-blue-50 text-blue-700 font-medium' : 'border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-blue-600 hover:border-blue-200'; ?>">
+                    <div class="w-4 flex-shrink-0 mr-2">
+                      <?php if ($is_current): ?>
+                        <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                      <?php endif; ?>
+                    </div>
+                    <span><?php echo $title ?></span>
                   </a>
                 <?php endwhile; ?>
               </nav>
@@ -71,13 +73,15 @@
                   $is_current = get_the_ID() === get_queried_object_id();
                 ?>
                   <a href="<?php echo $link ?>" 
-                     class="flex items-center px-5 py-3.5 transition-colors duration-200 <?php echo $is_current ? 'bg-green-50 text-green-700 font-medium border-l-4 border-green-500' : 'text-gray-700 hover:bg-gray-50 hover:text-green-600 border-l-4 border-transparent'; ?>">
-                    <?php if ($is_current): ?>
-                      <svg class="w-4 h-4 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                      </svg>
-                    <?php endif; ?>
-                    <span class="<?php echo $is_current ? 'ml-0' : 'ml-2'; ?>"><?php echo $title ?></span>
+                     class="flex items-center px-5 py-3.5 transition-colors duration-200 border-l-4 <?php echo $is_current ? 'border-blue-500 bg-blue-50 text-blue-700 font-medium' : 'border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-blue-600 hover:border-blue-200'; ?>">
+                    <div class="w-4 flex-shrink-0 mr-2">
+                      <?php if ($is_current): ?>
+                        <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                      <?php endif; ?>
+                    </div>
+                    <span><?php echo $title ?></span>
                   </a>
                 <?php endwhile; ?>
               </nav>
