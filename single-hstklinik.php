@@ -188,17 +188,57 @@
       <!-- Enhanced Main Content -->
       <div class="lg:w-2/3 xl:w-3/4 order-1 lg:order-2">
         <article class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
-          <?php
-          // Reset the main query to ensure we're working with the correct post
-          wp_reset_query();
-          if (have_posts()) : while (have_posts()) : the_post();
-              // Store the current post ID to check if it's Tjänster
-              $current_post_id = get_the_ID();
-              $is_tjanster = ($current_post_id === 109);
+          <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+            <?php if (get_the_ID() == 109): ?>
+              <!-- Only show title for Tjänster -->
+              <div class="p-6 md:p-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900"><?php the_title(); ?></h1>
+              </div>
 
-              // Only show featured image if this is NOT the Tjänster post
-              if (!$is_tjanster && has_post_thumbnail()):
-          ?>
+              <?php
+              // Get child services for Tjänster
+              $args_services = array(
+                'post_type' => 'hstklinik',
+                'post_parent' => get_the_ID(),
+                'posts_per_page' => -1,
+                'order' => 'ASC',
+                'orderby' => 'menu_order title'
+              );
+              $services_query = new WP_Query($args_services);
+              
+              if ($services_query->have_posts()): ?>
+                <div class="px-6 md:px-8 pb-8">
+                  <div class="grid sm:grid-cols-2 gap-6">
+                    <?php while ($services_query->have_posts()): $services_query->the_post(); ?>
+                      <a href="<?php echo esc_url(get_permalink()); ?>" 
+                         class="group flex flex-col h-full bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md hover:border-blue-200">
+                        <div class="p-5 flex-grow flex flex-col">
+                          <h3 class="text-xl font-semibold text-gray-900 group-hover:text-blue-700 transition-colors duration-200 mb-2">
+                            <?php the_title(); ?>
+                          </h3>
+                          <?php if (has_excerpt()): ?>
+                            <p class="text-gray-600 text-sm flex-grow">
+                              <?php echo get_the_excerpt(); ?>
+                            </p>
+                          <?php endif; ?>
+                          <div class="mt-4 pt-3 border-t border-gray-100 text-blue-600 font-medium flex items-center group-hover:text-blue-800">
+                            <span>Läs mer</span>
+                            <svg class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                            </svg>
+                          </div>
+                        </div>
+                      </a>
+                    <?php endwhile; ?>
+                  </div>
+                </div>
+              <?php 
+              endif;
+              wp_reset_postdata();
+              ?>
+            <?php else: ?>
+              <!-- Show full content for other posts -->
+              <?php if (has_post_thumbnail()): ?>
                 <div class="aspect-[16/9] overflow-hidden relative">
                   <?php the_post_thumbnail('large', ['class' => 'w-full h-full object-cover transition-transform duration-700 hover:scale-105']); ?>
                   <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -211,63 +251,23 @@
               <?php endif; ?>
 
               <div class="p-6 md:p-8">
-                <?php if ($is_tjanster || !has_post_thumbnail()): ?>
+                <?php if (!has_post_thumbnail()): ?>
                   <div class="border-b border-gray-200 mb-6 pb-2"></div>
                 <?php endif; ?>
-
+                
                 <?php if (!empty(get_the_content())): ?>
                   <div class="prose prose-lg max-w-none">
-                    <div class="prose-headings:text-gray-900 prose-headings:font-bold prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-6 prose-a:text-blue-600 hover:prose-a:text-blue-800 prose-a:font-medium prose-a:transition-colors prose-a:duration-200 prose-strong:text-gray-900 prose-strong:font-semibold prose-ul:list-disc prose-ol:list-decimal prose-li:text-gray-700 prose-li:my-2 prose-blockquote:border-l-4 prose-blockquote:border-blue-300 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-gray-700 prose-img:rounded-lg prose-img:shadow-lg">
-                      <?php the_content(); ?>
-                    </div>
+                    <?php the_content(); ?>
                   </div>
                 <?php endif; ?>
 
                 <?php 
-                // Display flexible content blocks
+                // Display blocks (needed for staff section)
                 display_blocks(get_the_ID()); 
                 ?>
-
-                <?php
-                // Check if this post has child services
-                $args_check = array(
-                  'post_type' => 'hstklinik',
-                  'post_parent' => get_the_ID(),
-                  'posts_per_page' => -1
-                );
-                $child_services = get_posts($args_check);
-
-                // If this is a parent page (has child services), display them in a grid
-                if (!empty($child_services)): ?>
-                  <div class="mt-12">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">Relaterade tjänster</h2>
-                    <div class="grid sm:grid-cols-2 gap-6">
-                      <?php foreach ($child_services as $service): ?>
-                        <a href="<?php echo esc_url(get_permalink($service->ID)); ?>"
-                          class="group flex flex-col h-full bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md hover:border-blue-200">
-                          <?php if (has_post_thumbnail($service->ID)): ?>
-                            <div class="aspect-[16/9] overflow-hidden">
-                              <?php echo get_the_post_thumbnail($service->ID, 'medium', ['class' => 'w-full h-full object-cover transition-transform duration-500 group-hover:scale-105']); ?>
-                            </div>
-                          <?php endif; ?>
-                          <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-900 group-hover:text-blue-600">
-                              <?php echo get_the_title($service->ID); ?>
-                            </h3>
-                            <?php if (has_excerpt($service->ID)): ?>
-                              <p class="mt-2 text-gray-600">
-                                <?php echo get_the_excerpt($service->ID); ?>
-                              </p>
-                            <?php endif; ?>
-                          </div>
-                        </a>
-                      <?php endforeach; ?>
-                    </div>
-                  </div>
-                <?php endif; ?>
               </div>
-          <?php endwhile;
-          endif; ?>
+            <?php endif; ?>
+          <?php endwhile; endif; ?>
         </article>
 
         <!-- Breadcrumbs Navigation -->
