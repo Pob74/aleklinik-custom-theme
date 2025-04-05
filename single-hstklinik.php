@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 
 <section class="w-full bg-gray-50 py-8 md:py-12">
-  This is single-hstklinik.php
+  
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col lg:flex-row gap-8">
       <?php if (!get_field('hide_sidebar')): ?>
@@ -16,10 +16,13 @@
             // First display the parent post (Tjänster)
             if ($tjanster_post): ?>
               <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
-                <h2 class="text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-blue-50 to-white border-b border-gray-200">
-                  <span class="inline-block border-l-4 border-blue-500 pl-3">Hästklinik</span>
-                </h2>
-                <nav class="divide-y divide-gray-100">
+                <button class="w-full text-left text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-blue-50 to-white border-b border-gray-200 flex items-center justify-between sidebar-toggle" data-target="tjanster-menu">
+                  <span class="inline-block border-l-4 border-blue-500 pl-3">Tjänster</span>
+                  <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+                <nav id="tjanster-menu" class="divide-y divide-gray-100 hidden">
                   <?php
                   // Display Tjänster as the first item
                   $is_current = get_the_ID() === 109;
@@ -94,10 +97,13 @@
             if ($query_tips->have_posts()):
             ?>
               <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-lg">
-                <h2 class="text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-green-50 to-white border-b border-gray-200">
+                <button class="w-full text-left text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-green-50 to-white border-b border-gray-200 flex items-center justify-between sidebar-toggle" data-target="tips-menu">
                   <span class="inline-block border-l-4 border-green-500 pl-3">Tips och råd</span>
-                </h2>
-                <nav class="divide-y divide-gray-100">
+                  <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+                <nav id="tips-menu" class="divide-y divide-gray-100 hidden">
                   <?php
                   while ($query_tips->have_posts()) : $query_tips->the_post();
                     $title = get_the_title();
@@ -134,10 +140,13 @@
                 $is_current = 249 === get_queried_object_id();
             ?>
                 <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-lg">
-                    <h2 class="text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-purple-50 to-white border-b border-gray-200">
+                    <button class="w-full text-left text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-purple-50 to-white border-b border-gray-200 flex items-center justify-between sidebar-toggle" data-target="personal-menu">
                         <span class="inline-block border-l-4 border-purple-500 pl-3">Personal</span>
-                    </h2>
-                    <nav class="divide-y divide-gray-100">
+                        <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <nav id="personal-menu" class="divide-y divide-gray-100 hidden">
                         <a href="<?php echo get_permalink($personal_page); ?>" 
                             class="flex items-center px-5 py-3.5 transition-all duration-200 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 <?php 
                             echo $is_current 

@@ -25,10 +25,13 @@
           if ($tjanster || $query_animal->have_posts()):
           ?>
             <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-lg">
-              <h2 class="text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-blue-50 to-white border-b border-gray-200">
+              <button class="w-full text-left text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-blue-50 to-white border-b border-gray-200 flex items-center justify-between sidebar-toggle" data-target="smadjur-menu">
                 <span class="inline-block border-l-4 border-blue-500 pl-3">Smådjursklinik</span>
-              </h2>
-              <nav class="divide-y divide-gray-100">
+                <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <nav id="smadjur-menu" class="divide-y divide-gray-100 hidden">
                 <?php
                 // First display Tjänster
                 if ($tjanster) {
