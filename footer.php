@@ -33,31 +33,35 @@
             <!-- Booking -->
             <div class="space-y-4">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Tidsbokning</h3>
-                <div class="space-y-2 text-gray-700">
-                    <?php if(have_rows('boking_horse', 'option')): ?>
-                        <?php while(have_rows('boking_horse', 'option')): the_row(); ?>
-                            <?php if(have_rows('phone-hours', 'option')): ?>
-                                <?php while(have_rows('phone-hours', 'option')): the_row(); ?>
-                                    <div class="d-flex justify-content-between p-strong">
-                                        <p><?php echo get_sub_field('day'); ?></p>
-                                        <p><?php echo get_sub_field('time'); ?></p>
-                                    </div>
-                                <?php endwhile; ?>
-                            <?php endif; ?>
-                            <div class="footer-column__text d-flex justify-content-between">
-                                <p class="day font-semibold">Hästklinik</p>
-                                <p class="hours"><?php the_sub_field('phone-number_horse'); ?></p>
-                            </div>
-                        <?php endwhile; ?>
+                <div class="space-y-4 text-gray-700">
+                    <?php 
+                    $horse_booking = get_field('boking_horse', 'option');
+                    if($horse_booking): ?>
+                        <div>
+                            <p class="font-semibold">Hästklinik</p>
+                            <?php 
+                            if(!empty($horse_booking['phone-hours'])): 
+                                foreach($horse_booking['phone-hours'] as $hours): ?>
+                                    <p><?php echo $hours['day']; ?> <?php echo $hours['time']; ?></p>
+                                <?php endforeach; 
+                            endif; ?>
+                            <p class="hover:text-blue-600 transition-colors"><?php echo $horse_booking['phone-number_horse']; ?></p>
+                        </div>
                     <?php endif; ?>
 
-                    <?php if(have_rows('boking_small-animals', 'option')): ?>
-                        <?php while(have_rows('boking_small-animals', 'option')): the_row(); ?>
-                            <div class="footer-column__text d-flex justify-content-between">
-                                <p class="day font-semibold">Smådjursklinik</p>
-                                <p class="hours"><?php the_sub_field('phone-number_small-animals'); ?></p>
-                            </div>
-                        <?php endwhile; ?>
+                    <?php 
+                    $small_animals_booking = get_field('boking_small-animals', 'option');
+                    if($small_animals_booking): ?>
+                        <div>
+                            <p class="font-semibold">Smådjursklinik</p>
+                            <?php 
+                            if(!empty($small_animals_booking['phone-hours'])): 
+                                foreach($small_animals_booking['phone-hours'] as $hours): ?>
+                                    <p><?php echo $hours['day']; ?> <?php echo $hours['time']; ?></p>
+                                <?php endforeach; 
+                            endif; ?>
+                            <p class="hover:text-blue-600 transition-colors"><?php echo $small_animals_booking['phone-number_small-animals']; ?></p>
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>

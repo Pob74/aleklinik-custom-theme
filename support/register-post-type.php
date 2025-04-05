@@ -12,10 +12,10 @@ function create_posttype_horse() {
                 'singular_name' => __( 'Hästklinik' )
             ),
             'supports' => array(
-            'page-attributes' /* This will show the post parent field */,
-            'thumbnail',
-            'title',
-            'editor',
+                'title',
+                'editor',
+                'thumbnail',
+                'page-attributes' /* This will show the post parent field */
             ),
             'public' => true,
             'has_archive' => true,
@@ -38,10 +38,10 @@ function create_posttype_animal() {
                 'singular_name' => __( 'Smådjur' )
             ),
             'supports' => array(
-            'page-attributes' /* This will show the post parent field */,
-            'thumbnail',
-            'title',
-            'editor',
+                'title',
+                'editor',
+                'thumbnail',
+                'page-attributes' /* This will show the post parent field */
             ),
             'public' => true,
             'has_archive' => true,

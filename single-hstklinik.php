@@ -10,6 +10,10 @@
         <div class="sticky top-[140px] space-y-6">
           <!-- Horse Clinic Links -->
           <?php
+          // Get the Tjänster post
+          $tjanster = get_post(109);
+          
+          // Get child services
           $args_horse = array(
             'post_type' => array('Hästklinik'),
             'post_parent' => '109',
@@ -18,7 +22,8 @@
             'orderby' => 'menu_order title'
           );
           $query_horse = new WP_Query($args_horse);
-          if ($query_horse->have_posts()):
+          
+          if ($tjanster || $query_horse->have_posts()):
           ?>
             <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-lg">
               <h2 class="text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-blue-50 to-white border-b border-gray-200">
@@ -26,6 +31,29 @@
               </h2>
               <nav class="divide-y divide-gray-100">
                 <?php
+                // First display Tjänster
+                if ($tjanster) {
+                  $is_current = $tjanster->ID === get_queried_object_id();
+                ?>
+                  <a href="<?php echo esc_url(get_permalink($tjanster->ID)); ?>" 
+                     class="flex items-center px-5 py-3.5 transition-all duration-200 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 <?php 
+                     echo $is_current 
+                       ? 'bg-blue-50 text-blue-700 font-medium before:bg-blue-500' 
+                       : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600 before:bg-transparent hover:before:bg-blue-200'; 
+                     ?>">
+                    <div class="w-4 flex-shrink-0 mr-2">
+                      <?php if ($is_current): ?>
+                        <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                      <?php endif; ?>
+                    </div>
+                    <span><?php echo get_the_title($tjanster->ID); ?></span>
+                  </a>
+                <?php
+                }
+                
+                // Then display child pages
                 while ($query_horse->have_posts()) : $query_horse->the_post();
                   $title = get_the_title();
                   $link = esc_url(get_permalink());
@@ -131,8 +159,16 @@
       <!-- Enhanced Main Content -->
       <div class="lg:w-2/3 xl:w-3/4 order-1 lg:order-2">
         <article class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
-          <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-            <?php if (has_post_thumbnail()): ?>
+          <?php if (have_posts()) : while (have_posts()) : the_post(); 
+            // Check if current post has child posts (meaning it's a parent/Tjänster post)
+            $args_check = array(
+              'post_type' => 'hstklinik',
+              'post_parent' => get_the_ID(),
+              'posts_per_page' => 1
+            );
+            $has_children = get_posts($args_check);
+          ?>
+            <?php if (has_post_thumbnail() && empty($has_children)): ?>
               <div class="aspect-[16/9] overflow-hidden relative">
                 <?php the_post_thumbnail('large', ['class' => 'w-full h-full object-cover transition-transform duration-700 hover:scale-105']); ?>
                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
