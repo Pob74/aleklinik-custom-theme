@@ -8,26 +8,26 @@
       <!-- Enhanced Sidebar -->
       <aside class="lg:w-1/3 xl:w-1/4 order-2 lg:order-1">
         <div class="sticky top-[140px] space-y-6">
-          <!-- Horse Clinic Links -->
+          <!-- Tjänster Links -->
           <?php
           // Get the Tjänster post
           $tjanster = get_post(109);
           
           // Get child services
-          $args_horse = array(
+          $args_services = array(
             'post_type' => array('Hästklinik'),
             'post_parent' => '109',
             'posts_per_page' => 100,
             'order' => 'ASC',
             'orderby' => 'menu_order title'
           );
-          $query_horse = new WP_Query($args_horse);
+          $query_services = new WP_Query($args_services);
           
-          if ($tjanster || $query_horse->have_posts()):
+          if ($tjanster || $query_services->have_posts()):
           ?>
             <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-lg">
               <h2 class="text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-blue-50 to-white border-b border-gray-200">
-                <span class="inline-block border-l-4 border-blue-500 pl-3">Hästklinik</span>
+                <span class="inline-block border-l-4 border-blue-500 pl-3">Tjänster</span>
               </h2>
               <nav class="divide-y divide-gray-100">
                 <?php
@@ -54,7 +54,7 @@
                 }
                 
                 // Then display child pages
-                while ($query_horse->have_posts()) : $query_horse->the_post();
+                while ($query_services->have_posts()) : $query_services->the_post();
                   $title = get_the_title();
                   $link = esc_url(get_permalink());
                   $is_current = get_the_ID() === get_queried_object_id();
@@ -82,51 +82,75 @@
           wp_reset_postdata();
           ?>
 
-          <!-- Tips and Advice -->
+          <!-- Tips och råd -->
           <?php
-          $args_tips = array(
-            'post_type' => array('Hästklinik'),
-            'post_parent' => '239',
-            'posts_per_page' => 100,
-            'order' => 'ASC',
-            'orderby' => 'menu_order title'
-          );
-          $query_tips = new WP_Query($args_tips);
-          if ($query_tips->have_posts()):
+          $tips_query = new WP_Query(array(
+              'post_type' => 'hstklinik',
+              'post_parent' => 239,
+              'posts_per_page' => 100,
+              'orderby' => array('menu_order' => 'ASC', 'title' => 'ASC')
+          ));
+          if ($tips_query->have_posts()): ?>
+              <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-lg">
+                  <h2 class="text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-green-50 to-white border-b border-gray-200">
+                      <span class="inline-block border-l-4 border-green-500 pl-3">Tips och råd</span>
+                  </h2>
+                  <nav class="divide-y divide-gray-100">
+                      <?php while ($tips_query->have_posts()) : $tips_query->the_post();
+                          $title = get_the_title();
+                          $link = esc_url(get_permalink());
+                          $is_current = get_the_ID() === get_queried_object_id();
+                      ?>
+                          <a href="<?php echo $link ?>" 
+                              class="flex items-center px-5 py-3.5 transition-all duration-200 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 <?php 
+                              echo $is_current 
+                                  ? 'bg-green-50 text-green-700 font-medium before:bg-green-500' 
+                                  : 'text-gray-700 hover:bg-gray-50 hover:text-green-600 before:bg-transparent hover:before:bg-green-200'; 
+                              ?>">
+                              <div class="w-4 flex-shrink-0 mr-2">
+                                  <?php if ($is_current): ?>
+                                      <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                      </svg>
+                                  <?php endif; ?>
+                              </div>
+                              <span><?php echo $title ?></span>
+                          </a>
+                      <?php endwhile; ?>
+                  </nav>
+              </div>
+          <?php endif;
+          wp_reset_postdata(); ?>
+
+          <!-- Personal section -->
+          <?php
+          $personal_page = get_post(249);
+          if ($personal_page) : 
+              $is_current = 249 === get_queried_object_id();
           ?>
-            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-lg">
-              <h2 class="text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-green-50 to-white border-b border-gray-200">
-                <span class="inline-block border-l-4 border-green-500 pl-3">Tips och råd</span>
-              </h2>
-              <nav class="divide-y divide-gray-100">
-                <?php
-                while ($query_tips->have_posts()) : $query_tips->the_post();
-                  $title = get_the_title();
-                  $link = esc_url(get_permalink());
-                  $is_current = get_the_ID() === get_queried_object_id();
-                ?>
-                  <a href="<?php echo $link ?>" 
-                     class="flex items-center px-5 py-3.5 transition-all duration-200 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 <?php 
-                     echo $is_current 
-                       ? 'bg-green-50 text-green-700 font-medium before:bg-green-500' 
-                       : 'text-gray-700 hover:bg-gray-50 hover:text-green-600 before:bg-transparent hover:before:bg-green-200'; 
-                     ?>">
-                    <div class="w-4 flex-shrink-0 mr-2">
-                      <?php if ($is_current): ?>
-                        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                        </svg>
-                      <?php endif; ?>
-                    </div>
-                    <span><?php echo $title ?></span>
-                  </a>
-                <?php endwhile; ?>
-              </nav>
-            </div>
-          <?php 
-          endif;
-          wp_reset_postdata();
-          ?>
+              <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-lg">
+                  <h2 class="text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-purple-50 to-white border-b border-gray-200">
+                      <span class="inline-block border-l-4 border-purple-500 pl-3">Personal</span>
+                  </h2>
+                  <nav class="divide-y divide-gray-100">
+                      <a href="<?php echo get_permalink($personal_page); ?>" 
+                          class="flex items-center px-5 py-3.5 transition-all duration-200 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 <?php 
+                          echo $is_current 
+                              ? 'bg-purple-50 text-purple-700 font-medium before:bg-purple-500' 
+                              : 'text-gray-700 hover:bg-gray-50 hover:text-purple-600 before:bg-transparent hover:before:bg-purple-200'; 
+                          ?>">
+                          <div class="w-4 flex-shrink-0 mr-2">
+                              <?php if ($is_current): ?>
+                                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                  </svg>
+                              <?php endif; ?>
+                          </div>
+                          <span><?php echo get_the_title($personal_page); ?></span>
+                      </a>
+                  </nav>
+              </div>
+          <?php endif; ?>
 
           <!-- Contact Information Box -->
           <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 p-5">
