@@ -84,6 +84,88 @@
           wp_reset_postdata();
           ?>
 
+          <!-- Tips and Advice -->
+          <?php
+          $args_tips = array(
+            'post_type' => array('smdjursklinik'),
+            'post_parent' => '260', // Changed from 241 to 260 for smådjursklinik
+            'posts_per_page' => 100,
+            'order' => 'ASC',
+            'orderby' => 'menu_order title'
+          );
+          $query_tips = new WP_Query($args_tips);
+          if ($query_tips->have_posts()):
+          ?>
+            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-lg">
+              <button class="w-full text-left text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-green-50 to-white border-b border-gray-200 flex items-center justify-between sidebar-toggle" data-target="tips-menu-smadjur">
+                <span class="inline-block border-l-4 border-green-500 pl-3">Tips och råd</span>
+                <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <nav id="tips-menu-smadjur" class="divide-y divide-gray-100 hidden">
+                <?php
+                while ($query_tips->have_posts()) : $query_tips->the_post();
+                  $title = get_the_title();
+                  $link = esc_url(get_permalink());
+                  $is_current = get_the_ID() === get_queried_object_id();
+                ?>
+                  <a href="<?php echo $link ?>"
+                    class="flex items-center px-5 py-3.5 transition-all duration-200 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 <?php
+                                                                                                                                                          echo $is_current
+                                                                                                                                                            ? 'bg-green-50 text-green-700 font-medium before:bg-green-500'
+                                                                                                                                                            : 'text-gray-700 hover:bg-gray-50 hover:text-green-600 before:bg-transparent hover:before:bg-green-200';
+                                                                                                                                                          ?>">
+                    <div class="w-4 flex-shrink-0 mr-2">
+                      <?php if ($is_current): ?>
+                        <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                        </svg>
+                      <?php endif; ?>
+                    </div>
+                    <span><?php echo $title ?></span>
+                  </a>
+                <?php endwhile; ?>
+              </nav>
+            </div>
+          <?php
+          endif;
+          wp_reset_postdata();
+          ?>
+
+          <!-- Personal section -->
+          <?php
+          $personal_page = get_post(269);
+          if ($personal_page) : 
+              $is_current = 269 === get_queried_object_id();
+          ?>
+              <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-lg">
+                  <button class="w-full text-left text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-purple-50 to-white border-b border-gray-200 flex items-center justify-between sidebar-toggle" data-target="personal-menu">
+                      <span class="inline-block border-l-4 border-purple-500 pl-3">Personal</span>
+                      <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                  </button>
+                  <nav id="personal-menu" class="divide-y divide-gray-100 hidden">
+                      <a href="<?php echo get_permalink($personal_page); ?>" 
+                          class="flex items-center px-5 py-3.5 transition-all duration-200 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 <?php 
+                          echo $is_current 
+                              ? 'bg-purple-50 text-purple-700 font-medium before:bg-purple-500' 
+                              : 'text-gray-700 hover:bg-gray-50 hover:text-purple-600 before:bg-transparent hover:before:bg-purple-200'; 
+                          ?>">
+                          <div class="w-4 flex-shrink-0 mr-2">
+                              <?php if ($is_current): ?>
+                                  <svg class="w-4 h-4 text-purple-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                  </svg>
+                              <?php endif; ?>
+                          </div>
+                          <span><?php echo get_the_title($personal_page); ?></span>
+                      </a>
+                  </nav>
+              </div>
+          <?php endif; ?>
+
           <!-- Contact Information Box -->
           <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 p-5">
             <h3 class="text-lg font-bold text-gray-800 mb-3 border-b pb-2 border-gray-200">Kontakta oss</h3>
