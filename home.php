@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<main class="min-h-screen bg-white  relative z-0 font-montserrat">
+<main class="min-h-screen bg-white relative z-0 font-montserrat">
     <div class="w-full bg-gray-50 py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Page Title -->
@@ -16,7 +16,7 @@
                             </a>
                         <?php endif; ?>
 
-                        <div class="flex flex-col flex-grow p-6">
+                        <div class="p-6 flex flex-col h-full">
                             <!-- Post Date -->
                             <time datetime="<?php echo get_the_date('c'); ?>" class="text-sm text-gray-500 mb-3 flex items-center font-montserrat">
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,21 +33,59 @@
                             </h2>
 
                             <!-- Post Content -->
-                            <div class="text-gray-600 mb-6 flex-grow font-montserrat">
+                            <div class="text-gray-600 mb-6 font-montserrat">
                                 <?php 
-                                $content = get_the_content();
-                                $content = wp_trim_words($content, 20, '...');
-                                echo $content;
+                                if (!has_post_thumbnail()) {
+                                    $content = get_the_content();
+                                    
+                                    // Split content into words while preserving HTML tags
+                                    preg_match_all('/(<[^>]+>|[^<>\s]+)\s*/u', $content, $matches);
+                                    $words_with_tags = $matches[0];
+                                    
+                                    $output = '';
+                                    $word_count = 0;
+                                    $in_tag = false;
+                                    
+                                    foreach ($words_with_tags as $word) {
+                                        // If it's an HTML tag
+                                        if (preg_match('/<[^>]+>/u', $word)) {
+                                            $output .= $word;
+                                            // Check if it's an opening tag
+                                            if (!preg_match('/<\//u', $word)) {
+                                                $in_tag = true;
+                                            } else {
+                                                $in_tag = false;
+                                            }
+                                        } else {
+                                            // If it's a word
+                                            if (!$in_tag) {
+                                                $word_count++;
+                                            }
+                                            if ($word_count <= 20) {
+                                                $output .= $word;
+                                            } else {
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    
+                                    echo $output . '...';
+                                } else {
+                                    // If has featured image, just show trimmed text content
+                                    echo wp_trim_words(strip_tags(get_the_content()), 20, '...');
+                                }
                                 ?>
                             </div>
 
                             <!-- Read More Link -->
-                            <a href="<?php the_permalink(); ?>" class="inline-flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200 font-montserrat font-medium">
-                                Läs mer
-                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                </svg>
-                            </a>
+                            <div class="mt-auto">
+                                <a href="<?php the_permalink(); ?>" class="inline-flex items-center text-gray-700 hover:text-gray-900 transition-colors duration-200 font-montserrat font-medium">
+                                    Läs mer
+                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </article>
                 <?php endwhile; ?>

@@ -1,5 +1,7 @@
 <?php
 
+// Include the custom nav walker
+require_once get_template_directory() . '/inc/class-klinik-nav-walker.php';
 
 // Exit if accessed directly
 if (! defined('ABSPATH'))

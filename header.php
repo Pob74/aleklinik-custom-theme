@@ -9,7 +9,7 @@
 <body <?php body_class(); ?>>
 <?php do_action('wp_body_open'); ?>
 
-<header id="header" class="sticky top-0 w-full z-50 px-6 py-4 bg-gray-100 opacity-70 transition-all duration-300 ease-in-out" style="transform: translateY(0);">
+<header id="header" class="sticky top-0 w-full z-50 px-6 py-4 transition-all duration-300 ease-in-out" style="transform: translateY(0);">
     <nav class="container mx-auto flex items-center justify-between">
         <!-- Logo -->
         <a href="<?php echo esc_url(home_url('/')); ?>" class="z-50">
@@ -31,9 +31,9 @@
             wp_nav_menu(array(
                 'theme_location' => 'primary_menu',
                 'container' => false,
-                'menu_class' => 'flex flex-col lg:flex-row items-center justify-center gap-12 h-full lg:h-auto p-8 lg:p-0',
+                'menu_class' => 'flex flex-col lg:flex-row items-center justify-center gap-12 h-full lg:h-auto p-8 lg:p-0 relative',
                 'fallback_cb' => false,
-                'add_li_class' => 'text-lg hover:text-gray-600'
+                'walker' => new Klinik_Nav_Walker()
             ));
             ?>
         </div>
