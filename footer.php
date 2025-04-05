@@ -12,7 +12,7 @@
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Öppettider</h3>
                 <div class="space-y-2">
                     <div class="text-gray-700">
-                        <h4 class="font-medium">Hästklinik</h4>
+                        <h4 class="font-semibold">Hästklinik</h4>
                         <?php if(have_rows('opening_hours_horse', 'option')): ?>
                             <?php while(have_rows('opening_hours_horse', 'option')): the_row(); ?>
                                 <p><?php echo get_sub_field('day'); ?>: <?php echo get_sub_field('time'); ?></p>
@@ -20,7 +20,7 @@
                         <?php endif; ?>
                     </div>
                     <div class="text-gray-700 mt-4">
-                        <h4 class="font-medium">Smådjursklinik</h4>
+                        <h4 class="font-semibold">Smådjursklinik</h4>
                         <?php if(have_rows('opening_hours_small-animals', 'option')): ?>
                             <?php while(have_rows('opening_hours_small-animals', 'option')): the_row(); ?>
                                 <p><?php echo get_sub_field('day'); ?>: <?php echo get_sub_field('time'); ?></p>
@@ -45,7 +45,7 @@
                                 <?php endwhile; ?>
                             <?php endif; ?>
                             <div class="footer-column__text d-flex justify-content-between">
-                                <p class="day">Hästklinik</p>
+                                <p class="day font-semibold">Hästklinik</p>
                                 <p class="hours"><?php the_sub_field('phone-number_horse'); ?></p>
                             </div>
                         <?php endwhile; ?>
@@ -54,7 +54,7 @@
                     <?php if(have_rows('boking_small-animals', 'option')): ?>
                         <?php while(have_rows('boking_small-animals', 'option')): the_row(); ?>
                             <div class="footer-column__text d-flex justify-content-between">
-                                <p class="day">Smådjursklinik</p>
+                                <p class="day font-semibold">Smådjursklinik</p>
                                 <p class="hours"><?php the_sub_field('phone-number_small-animals'); ?></p>
                             </div>
                         <?php endwhile; ?>
@@ -81,18 +81,23 @@
             <div class="space-y-4">
                 <h3 class="text-xl font-semibold text-gray-800 mb-4"><?php echo get_field('contact_title', 'option') ?: 'Kontakt'; ?></h3>
                 <div class="space-y-2 text-gray-700">
+                    <?php 
+                    $contact_info = get_field('kontakt', 'option');
+                    
+                    if($contact_info): ?>
                     <div>
-                        <p class="font-medium"><?php echo get_field('vet_phone_hours_title', 'option') ?: 'Telefontid hästveterinär'; ?></p>
-                        <p><?php echo get_field('vet_phone_hours', 'option') ?: 'Mån - fre 8:30-9:00'; ?></p>
-                        <p class="hover:text-blue-600 transition-colors"><?php echo get_field('horse_clinic_phone', 'option') ?: '0303-33 59 60'; ?></p>
+                        <p class="font-medium"><?php echo  $contact_info['telefontid_hastveterinar_text'] ?: 'Debug info'; ?></p>
+                        <p><?php echo $contact_info['days_and_time'] ?: 'Debug info'; ?></p>
+                        <p class="hover:text-blue-600 transition-colors"><?php echo $contact_info['telefon'] ?: 'Debug info'; ?></p>
                     </div>
                     <div class="mt-4">
-                        <p class="hover:text-blue-600 transition-colors"><?php echo get_field('horse_clinic_email', 'option') ?: 'hast@aledjurklinik.se'; ?></p>
+                        <p class="hover:text-blue-600 transition-colors"><?php echo $contact_info['epost'] ?: 'Debug info'; ?></p>
                     </div>
                     <div class="mt-4">
                         <p class="font-medium"><?php echo get_field('emergency_title', 'option') ?: 'Hästakut:'; ?></p>
-                        <p class="hover:text-blue-600 transition-colors"><?php echo get_field('emergency_phone', 'option') ?: '0769-42 88 03'; ?></p>
+                        <p class="hover:text-blue-600 transition-colors"><?php echo $contact_info['hastakut'] ?: 'Debug info'; ?></p>
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
