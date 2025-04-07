@@ -269,6 +269,11 @@
                     <?php the_content(); ?>
                   </div>
                 <?php endif; ?>
+
+                <?php 
+                // Display blocks (needed for staff section)
+                display_blocks(get_the_ID()); 
+                ?>
               </div>
             <?php endif; ?>
           <?php endwhile; endif; ?>

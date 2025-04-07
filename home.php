@@ -6,13 +6,13 @@
             <!-- Page Title -->
             <h1 class="text-4xl font-bold text-gray-900 mb-12 text-center font-montserrat">Aktuellt</h1>
 
-            <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+            <div class="grid gap-12 md:grid-cols-2 ">
                 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
                     <article id="post-<?php the_ID(); ?>" class="flex flex-col bg-white rounded-lg shadow-sm overflow-hidden transition-shadow duration-300 hover:shadow-lg">
                         <!-- Featured Image -->
                         <?php if (has_post_thumbnail()) : ?>
                             <a href="<?php the_permalink(); ?>" class="block aspect-[16/9] overflow-hidden">
-                                <?php the_post_thumbnail('large', ['class' => 'w-full h-full object-cover transition-transform duration-300 hover:scale-105']); ?>
+                                <?php the_post_thumbnail('large', ['class' => 'w-full h-full object-cover object-top transition-transform duration-300 hover:scale-105']); ?>
                             </a>
                         <?php endif; ?>
 
@@ -94,7 +94,12 @@
                 <div class="col-span-full mt-12">
                     <div class="flex justify-center gap-2 font-montserrat">
                         <?php
+                        $big = 999999999; // need an unlikely integer
                         echo paginate_links(array(
+                            'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                            'format' => '?paged=%#%',
+                            'current' => max(1, get_query_var('paged')),
+                            'total' => $wp_query->max_num_pages,
                             'prev_text' => '&larr; Föregående',
                             'next_text' => 'Nästa &rarr;',
                             'class' => 'px-4 py-2 bg-white text-gray-700 rounded-lg shadow-sm hover:bg-gray-50 transition-colors duration-200'

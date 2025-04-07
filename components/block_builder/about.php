@@ -16,11 +16,11 @@ $team = get_sub_field('team_section');
 
         <!-- Section title -->
         <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900"><?php echo esc_html($title); ?></h2>
+            <h2 class="text-4xl md:text-4xl font-bold text-gray-900"><?php echo esc_html($title); ?></h2>
         </div>
             
             <!-- Introduction -->
-            <div class="max-w-7xl mb-20 mx-auto prose prose-lg text-gray-600">
+            <div class="max-w-7xl mb-20 mx-auto prose prose-xl text-gray-600">
                 <?php echo wp_kses_post($section_intro); ?>
             </div>
 

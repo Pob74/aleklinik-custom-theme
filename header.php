@@ -14,7 +14,7 @@
         <!-- Logo -->
         <a href="<?php echo esc_url(home_url('/')); ?>" class="z-50">
             <div class="w-32 h-16">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/logo-sm.png" alt="Logo" class="w-full h-full object-contain">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/logo-sm.png" alt="Logo" class="w-full h-full object-contain ">
             </div>
         </a>
 

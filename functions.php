@@ -26,4 +26,12 @@ function klinik_menu_item_classes($classes, $item, $args) {
 }
 add_filter('nav_menu_css_class', 'klinik_menu_item_classes', 10, 3);
 
+// Modify main query for home page
+function modify_home_query($query) {
+    if (!is_admin() && $query->is_main_query() && $query->is_home()) {
+        $query->set('posts_per_page', 10);
+    }
+}
+add_action('pre_get_posts', 'modify_home_query');
+
    
