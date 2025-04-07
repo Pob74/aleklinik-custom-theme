@@ -1,41 +1,63 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
+    <meta charset="<?php bloginfo('charset'); ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index, follow">
+    
+    <title><?php
+        if (is_front_page()) {
+            bloginfo('name'); echo ' - '; bloginfo('description');
+        } elseif (is_singular('hstklinik')) {
+            echo 'Hästklinik - '; wp_title('', true, 'right'); echo ' | '; bloginfo('name');
+        } elseif (is_singular('smdjursklinik')) {
+            echo 'Smådjursklinik - '; wp_title('', true, 'right'); echo ' | '; bloginfo('name');
+        } else {
+            wp_title('', true, 'right'); echo ' | '; bloginfo('name');
+        }
+    ?></title>
+
+    <?php if (is_singular() && has_excerpt()) : ?>
+        <meta name="description" content="<?php echo esc_attr(get_the_excerpt()); ?>">
+    <?php else : ?>
+        <meta name="description" content="<?php bloginfo('description'); ?>">
+    <?php endif; ?>
 
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
 <?php do_action('wp_body_open'); ?>
 
-<header id="header" class="sticky top-0 w-full z-50 px-6 py-4 transition-all duration-300 ease-in-out" style="transform: translateY(0);">
+<header id="header" class="sticky top-0 w-full z-50 px-6 py-4 transition-all duration-300 ease-in-out bg-white/95 backdrop-blur-md border-b border-gray-100/80">
     <nav class="container mx-auto flex items-center justify-between">
         <!-- Logo -->
         <a href="<?php echo esc_url(home_url('/')); ?>" class="z-50">
             <div class="w-32 h-16">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/logo-sm.png" alt="Logo" class="w-full h-full object-contain ">
+                <img src="<?php echo get_template_directory_uri(); ?>/assets/logo-sm.png" alt="Logo" class="w-full h-full object-contain">
             </div>
         </a>
 
         <!-- Mobile menu button -->
-        <button id="mobile-menu-button" class="lg:hidden z-50">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button id="mobile-menu-button" class="lg:hidden z-50 p-2 rounded-lg hover:bg-gray-100 transition-colors">
+            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
         </button>
 
         <!-- Navigation Menu -->
-        <div id="nav-menu" class="fixed lg:static inset-0 bg-gray-100 lg:bg-transparent transform lg:transform-none transition-transform duration-300 ease-in-out translate-x-full lg:translate-x-0">
-            <?php
-            wp_nav_menu(array(
-                'theme_location' => 'primary_menu',
-                'container' => false,
-                'menu_class' => 'flex flex-col lg:flex-row items-center justify-center gap-12 h-full lg:h-auto p-8 lg:p-0 relative',
-                'fallback_cb' => false,
-                'walker' => new Klinik_Nav_Walker()
-            ));
-            ?>
+        <div id="nav-menu" class="fixed lg:static inset-0 bg-white lg:bg-transparent transform lg:transform-none transition-all duration-300 ease-in-out translate-x-full lg:translate-x-0 h-full lg:h-auto overflow-y-auto lg:overflow-visible">
+            <div class="container mx-auto px-6 py-8 lg:p-0">
+                <?php
+                wp_nav_menu(array(
+                    'theme_location' => 'primary_menu',
+                    'container' => false,
+                    'menu_class' => 'flex flex-col lg:flex-row items-start lg:items-center lg:justify-end gap-6 lg:gap-12',
+                    'fallback_cb' => false,
+                    'walker' => new Klinik_Nav_Walker()
+                ));
+                ?>
+            </div>
         </div>
     </nav>
 </header>

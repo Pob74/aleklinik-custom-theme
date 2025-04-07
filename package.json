@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "css": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch"
+    "css": "npx tailwindcss -i ./src/input.css -o ./src/output.css --watch",
+    "build:css": "npx tailwindcss -i ./src/input.css -o ./src/output.css --minify",
+    "build": "npm run build:css",
+    "dev": "npm run css"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
