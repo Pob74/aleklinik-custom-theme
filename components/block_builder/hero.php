@@ -1,8 +1,9 @@
 <?php
-$pre_title = get_sub_field('section_pre_title');
+$pre_title = get_sub_field('section_pre-title');
 $title = get_sub_field('section_title');
 $image = get_sub_field('section_image');
 $show_latest_post = get_sub_field('show_latest_post');
+
 
 // Get latest post if option is enabled
 $latest_post = null;
@@ -27,15 +28,15 @@ if ($show_latest_post) {
 
     <!-- Content container -->
     <div class="relative h-full container mx-auto px-6">
-        <div class="flex flex-col justify-center h-full max-w-4xl">
+        <div class="flex flex-col justify-center h-full max-w-5xl">
             <!-- Pre-heading -->
             <p class="text-white/90 text-xl md:text-2xl mb-4 font-light tracking-wide">
-                Ale Djurklinik
+                <?php echo esc_html($pre_title); ?>
             </p>
 
             <!-- Main heading -->
             <h1 class="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.2] md:leading-[1.2]">
-                Veterinärvård med kompetens och engagemang
+                <?php echo esc_html($title); ?>
             </h1>
         </div>
 
