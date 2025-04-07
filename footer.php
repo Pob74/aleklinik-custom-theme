@@ -109,9 +109,13 @@
         <!-- Bottom Footer -->
         <div class="mt-12 pt-8 border-t border-gray-200">
             <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <?php 
+                $clinic_name = get_field('hitta_hit', 'option');
+                if($clinic_name): ?>
                 <div class="text-gray-600">
-                    © <?php echo get_field('clinic_name', 'option') ?: 'Ale Djurklinik'; ?> <?php echo date('Y'); ?>
+                    © <?php echo $clinic_name['clinic_name']; ?> <?php echo date('Y'); ?>
                 </div>
+                <?php endif; ?>
                 <div class="flex items-center space-x-4">
                     <span class="text-gray-600">Följ oss</span>
                     <?php if (get_field('facebook_url', 'option')): ?>

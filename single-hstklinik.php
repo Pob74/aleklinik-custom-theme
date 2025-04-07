@@ -9,80 +9,53 @@
         <aside class="lg:w-1/3 xl:w-1/4 order-2 lg:order-1">
           <div class="sticky top-[140px] space-y-6">
             <!-- Horse Clinic Links -->
-            <?php
-            // Get the Tjänster parent post
-            $tjanster_post = get_post(109);
+            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
+              <button class="w-full text-left text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-blue-50 to-white border-b border-gray-200 flex items-center justify-between sidebar-toggle" data-target="tjanster-menu">
+                <span class="inline-block border-l-4 border-blue-500 pl-3">Tjänster</span>
+                <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <nav id="tjanster-menu" class="divide-y divide-gray-100 hidden">
+                <?php
+                // Get and display all child posts
+                $args_horse = array(
+                  'post_type' => array('Hästklinik'),
+                  'post_parent' => '109',
+                  'posts_per_page' => 100,
+                  'order' => 'ASC',
+                  'orderby' => 'menu_order title'
+                );
+                $query_horse = new WP_Query($args_horse);
 
-            // First display the parent post (Tjänster)
-            if ($tjanster_post): ?>
-              <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
-                <button class="w-full text-left text-xl font-bold text-gray-800 p-5 bg-gradient-to-r from-blue-50 to-white border-b border-gray-200 flex items-center justify-between sidebar-toggle" data-target="tjanster-menu">
-                  <span class="inline-block border-l-4 border-blue-500 pl-3">Tjänster</span>
-                  <svg class="w-5 h-5 text-gray-500 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                  </svg>
-                </button>
-                <nav id="tjanster-menu" class="divide-y divide-gray-100 hidden">
-                  <?php
-                  // Display Tjänster as the first item
-                  $is_current = get_the_ID() === 109;
-                  ?>
-                  <a href="<?php echo esc_url(get_permalink($tjanster_post)); ?>"
-                    class="flex items-center px-5 py-3.5 transition-all duration-200 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 <?php
-                                                                                                                                                                    echo $is_current
-                                                                                                                                                                      ? 'bg-blue-50 text-blue-700 font-medium before:bg-blue-500'
-                                                                                                                                                                      : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600 before:bg-transparent hover:before:bg-blue-200';
-                                                                                                                                                                    ?>">
-                    <div class="w-4 flex-shrink-0 mr-2">
-                      <?php if ($is_current): ?>
-                        <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                        </svg>
-                      <?php endif; ?>
-                    </div>
-                    <span><?php echo $tjanster_post->post_title; ?></span>
-                  </a>
-
-                  <?php
-                  // Then get and display all child posts
-                  $args_horse = array(
-                    'post_type' => array('Hästklinik'),
-                    'post_parent' => '109',
-                    'posts_per_page' => 100,
-                    'order' => 'ASC',
-                    'orderby' => 'menu_order title'
-                  );
-                  $query_horse = new WP_Query($args_horse);
-
-                  if ($query_horse->have_posts()):
-                    while ($query_horse->have_posts()) : $query_horse->the_post();
-                      $title = get_the_title();
-                      $link = esc_url(get_permalink());
-                      $is_current = get_the_ID() === get_queried_object_id();
-                  ?>
-                      <a href="<?php echo $link ?>"
-                        class="flex items-center px-5 py-3.5 transition-all duration-200 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 <?php
-                                                                                                                                                                        echo $is_current
-                                                                                                                                                                          ? 'bg-blue-50 text-blue-700 font-medium before:bg-blue-500'
-                                                                                                                                                                          : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600 before:bg-transparent hover:before:bg-blue-200';
-                                                                                                                                                                        ?>">
-                        <div class="w-4 flex-shrink-0 mr-2">
-                          <?php if ($is_current): ?>
-                            <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                            </svg>
-                          <?php endif; ?>
-                        </div>
-                        <span><?php echo $title ?></span>
-                      </a>
-                  <?php
-                    endwhile;
-                  endif;
-                  wp_reset_postdata();
-                  ?>
-                </nav>
-              </div>
-            <?php endif; ?>
+                if ($query_horse->have_posts()):
+                  while ($query_horse->have_posts()) : $query_horse->the_post();
+                    $title = get_the_title();
+                    $link = esc_url(get_permalink());
+                    $is_current = get_the_ID() === get_queried_object_id();
+                ?>
+                    <a href="<?php echo $link ?>"
+                      class="flex items-center px-5 py-3.5 transition-all duration-200 relative before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 <?php
+                      echo $is_current
+                        ? 'bg-blue-50 text-blue-700 font-medium before:bg-blue-500'
+                        : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600 before:bg-transparent hover:before:bg-blue-200';
+                      ?>">
+                      <div class="w-4 flex-shrink-0 mr-2">
+                        <?php if ($is_current): ?>
+                          <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                          </svg>
+                        <?php endif; ?>
+                      </div>
+                      <span><?php echo $title ?></span>
+                    </a>
+                <?php
+                  endwhile;
+                endif;
+                wp_reset_postdata();
+                ?>
+              </nav>
+            </div>
 
             <!-- Tips and Advice -->
             <?php
@@ -206,55 +179,7 @@
       <div class="lg:w-2/3 xl:w-3/4 order-1 lg:order-2">
         <article class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100">
           <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-            <?php if (get_the_ID() == 109): ?>
-              <!-- Only show title for Tjänster -->
-              <div class="p-6 md:p-8">
-                <h1 class="text-3xl md:text-4xl font-bold text-gray-900"><?php the_title(); ?></h1>
-              </div>
-
-              <?php
-              // Get child services for Tjänster
-              $args_services = array(
-                'post_type' => 'hstklinik',
-                'post_parent' => get_the_ID(),
-                'posts_per_page' => -1,
-                'order' => 'ASC',
-                'orderby' => 'menu_order title'
-              );
-              $services_query = new WP_Query($args_services);
-              
-              if ($services_query->have_posts()): ?>
-                <div class="px-6 md:px-8 pb-8">
-                  <div class="grid sm:grid-cols-2 gap-6">
-                    <?php while ($services_query->have_posts()): $services_query->the_post(); ?>
-                      <a href="<?php echo esc_url(get_permalink()); ?>" 
-                         class="group flex flex-col h-full bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md hover:border-blue-200">
-                        <div class="p-5 flex-grow flex flex-col">
-                          <h3 class="text-xl font-semibold text-gray-900 group-hover:text-blue-700 transition-colors duration-200 mb-2">
-                            <?php the_title(); ?>
-                          </h3>
-                          <?php if (has_excerpt()): ?>
-                            <p class="text-gray-600 text-sm flex-grow">
-                              <?php echo get_the_excerpt(); ?>
-                            </p>
-                          <?php endif; ?>
-                          <div class="mt-4 pt-3 border-t border-gray-100 text-blue-600 font-medium flex items-center group-hover:text-blue-800">
-                            <span>Läs mer</span>
-                            <svg class="w-4 h-4 ml-1 transition-transform duration-200 group-hover:translate-x-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                            </svg>
-                          </div>
-                        </div>
-                      </a>
-                    <?php endwhile; ?>
-                  </div>
-                </div>
-              <?php 
-              endif;
-              wp_reset_postdata();
-              ?>
-            <?php else: ?>
-              <!-- Show full content for other posts -->
+              <!-- Show full content for all posts -->
               <?php if (has_post_thumbnail()): ?>
                 <div class="aspect-[16/9] overflow-hidden relative">
                   <?php the_post_thumbnail('large', ['class' => 'w-full h-full object-cover transition-transform duration-700 hover:scale-105']); ?>
@@ -283,7 +208,6 @@
                 display_blocks(get_the_ID()); 
                 ?>
               </div>
-            <?php endif; ?>
           <?php endwhile; endif; ?>
         </article>
 
