@@ -1838,6 +1838,10 @@ video {
   pointer-events: none;
 }
 
+.visible {
+  visibility: visible;
+}
+
 .fixed {
   position: fixed;
 }
@@ -1890,6 +1894,14 @@ video {
   top: 1.5rem;
 }
 
+.left-6 {
+  left: 1.5rem;
+}
+
+.top-4 {
+  top: 1rem;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -1908,6 +1920,26 @@ video {
 
 .z-30 {
   z-index: 30;
+}
+
+.z-\[50\] {
+  z-index: 50;
+}
+
+.z-\[55\] {
+  z-index: 55;
+}
+
+.z-\[60\] {
+  z-index: 60;
+}
+
+.z-\[1000\] {
+  z-index: 1000;
+}
+
+.z-\[99\] {
+  z-index: 99;
 }
 
 .order-1 {
@@ -2482,6 +2514,10 @@ video {
   background-color: rgb(0 0 0 / 0.8);
 }
 
+.bg-black\/90 {
+  background-color: rgb(0 0 0 / 0.9);
+}
+
 .bg-gradient-to-r {
   background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
@@ -2660,6 +2696,14 @@ video {
   padding-top: 2rem;
 }
 
+.pt-24 {
+  padding-top: 6rem;
+}
+
+.pt-32 {
+  padding-top: 8rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -2835,6 +2879,10 @@ video {
 
 .opacity-0 {
   opacity: 0;
+}
+
+.opacity-100 {
+  opacity: 1;
 }
 
 .shadow-lg {
@@ -3431,4 +3479,14 @@ video {
   .xl\:w-3\/4 {
     width: 75%;
   }
+}
+
+.\[\&_a\]\:text-white a {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.\[\&_svg\]\:text-white svg {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }

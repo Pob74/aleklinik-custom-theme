@@ -25,11 +25,21 @@
     <?php endif; ?>
 
     <?php wp_head(); ?>
+    <style>
+        /* Mobile menu styling */
+        #nav-menu { background-color: #1f2937; } /* bg-gray-900 equivalent */
+        /* Removed forced white color to fix visibility issue */
+        #nav-menu svg { color: white !important; }
+        #nav-menu .menu-item { margin-bottom: 1.5rem; }
+        #nav-menu .sub-menu { margin-top: 0.75rem; margin-left: 1.5rem; }
+        #nav-menu .sub-menu .menu-item { margin-bottom: 0.75rem; }
+        #nav-menu ul, #nav-menu li { color: white !important; }
+    </style>
 </head>
 <body <?php body_class(); ?>>
 <?php do_action('wp_body_open'); ?>
 
-<header id="header" class="sticky top-0 w-full z-50 px-6 py-4 transition-all duration-300 ease-in-out bg-white/95 backdrop-blur-md border-b border-gray-100/80">
+<header id="header" class="sticky top-0 w-full z-50 px-6 py-4 transition-all duration-300 ease-in-out bg-white/95 backdrop-blur-md border-b border-gray-100/80 ">
     <div class="container mx-auto">
         <nav class="flex items-center justify-between relative">
             <!-- Logo -->
@@ -61,21 +71,4 @@
         </nav>
     </div>
 
-    <!-- Mobile Navigation Menu -->
-    <div id="nav-menu" class="fixed lg:hidden inset-0 bg-white transform transition-transform duration-300 ease-in-out translate-x-full z-40">
-        <div class="container mx-auto px-6 py-16 h-full">
-            <?php
-            wp_nav_menu(array(
-                'theme_location' => 'primary_menu',
-                'container' => false,
-                'menu_class' => 'flex flex-col items-start gap-6 text-white',
-                'fallback_cb' => false,
-                'walker' => new Klinik_Nav_Walker()
-            ));
-            ?>
-        </div>
-    </div>
 </header>
-
-<!-- Mobile menu overlay -->
-<div id="mobile-menu-overlay" class="fixed inset-0 bg-black/80 z-30 lg:hidden opacity-0 pointer-events-none transition-opacity duration-300"></div>
