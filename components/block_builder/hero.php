@@ -42,7 +42,7 @@ if ($show_latest_post) {
 
         <?php if ($show_latest_post && !empty($latest_post)) : ?>
             <!-- Enhanced Latest post link - Gray theme -->
-            <div class="absolute bottom-8 right-6 bg-white rounded-lg shadow-lg overflow-hidden border border-gray-700 w-72">
+            <div class="absolute bottom-4 lg:bottom-8  right-4 lg:right-6 bg-white rounded-lg shadow-lg overflow-hidden border border-gray-700 w-72 h-24 lg:h-40">
                 <a href="<?= get_permalink($latest_post[0]->ID); ?>" class="block">
                     <div class="bg-gray-700 px-4 py-2 flex items-center justify-between">
                         <span class="text-white font-bold">AKTUELLT</span>

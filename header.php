@@ -53,7 +53,7 @@
                 wp_nav_menu(array(
                     'theme_location' => 'primary_menu',
                     'container' => false,
-                    'menu_class' => 'flex items-center justify-end gap-12',
+                    'menu_class' => 'flex items-center justify-end gap-3 md:gap-4 xl:gap-12',
                     'fallback_cb' => false,
                     'walker' => new Klinik_Nav_Walker()
                 ));

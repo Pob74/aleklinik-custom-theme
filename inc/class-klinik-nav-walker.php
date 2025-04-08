@@ -6,7 +6,8 @@ class Klinik_Nav_Walker extends Walker_Nav_Menu {
      */
     public function start_lvl(&$output, $depth = 0, $args = null) {
         $indent = str_repeat("\t", $depth);
-        $output .= "\n$indent<ul class=\"sub-menu bg-white rounded-md shadow-lg py-2 mt-1\">\n";
+        // Add data-visible attribute for tablet toggle
+        $output .= "\n$indent<ul class=\"sub-menu bg-white rounded-md shadow-lg py-2 mt-1 lg:group-hover:block\" data-visible=\"false\">\n";
     }
 
     /**
@@ -34,7 +35,7 @@ class Klinik_Nav_Walker extends Walker_Nav_Menu {
         
         // Add depth-specific classes
         if ($depth === 0) {
-            $classes[] = 'main-menu-item relative';
+            $classes[] = 'main-menu-item relative group';
         } else {
             $classes[] = 'sub-menu-item';
         }
@@ -78,17 +79,33 @@ class Klinik_Nav_Walker extends Walker_Nav_Menu {
         $title = apply_filters('nav_menu_item_title', $title, $item, $args, $depth);
         
         $item_output = $args->before;
-        $item_output .= '<a' . $attributes . '>';
-        $item_output .= $args->link_before . $title . $args->link_after;
         
-        // Add dropdown arrow for items with children at depth 0
+        // Create a wrapper div for link and button if has children
         if ($args->walker->has_children && $depth === 0) {
-            $item_output .= '<svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>';
+            $item_output .= '<div class="flex items-center">';
         }
         
+        $item_output .= '<a' . $attributes . '>';
+        $item_output .= $args->link_before . $title . $args->link_after;
         $item_output .= '</a>';
+        
+        // Add dropdown toggle button for items with children
+        if ($args->walker->has_children && $depth === 0) {
+            // Add tablet/mobile toggle button
+            $item_output .= '<button class="submenu-toggle ml-2 p-2 focus:outline-none hidden md:block lg:hidden">
+                <svg class="h-4 w-4 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>';
+            
+            // Add desktop dropdown arrow (visible only on desktop)
+            $item_output .= '<svg class="hidden lg:block ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>';
+            
+            $item_output .= '</div>';
+        }
+        
         $item_output .= $args->after;
         
         $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args, $id);

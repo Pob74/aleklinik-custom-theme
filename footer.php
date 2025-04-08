@@ -133,14 +133,7 @@
 
 <!-- Mobile Navigation Menu -->
 <div id="nav-menu" class="fixed lg:hidden inset-0 bg-gray-900 transform transition-transform duration-300 ease-in-out translate-x-full z-[55] overflow-auto">
-    <!-- Mobile Logo -->
-    <div class="fixed top-4 left-6 z-[55]">
-        <a href="<?php echo esc_url(home_url('/')); ?>">
-            <div class="w-32 h-16">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/logo-sm.png" alt="Logo" class="w-full h-full object-contain">
-            </div>
-        </a>
-    </div>
+    
 
     <div class="container mx-auto px-6 pt-24 h-full overflow-y-auto">
         <div class="mobile-menu-content">
@@ -148,14 +141,14 @@
             wp_nav_menu(array(
                 'theme_location' => 'primary_menu',
                 'container' => false,
-                'menu_class' => 'mobile-menu-list flex flex-col items-start gap-6 text-xl text-white font-semibold',
+                'menu_class' => 'mobile-menu-list flex flex-col items-start gap-3 lg:gap-6 text-xl text-white font-semibold',
                 'fallback_cb' => false,
                 'walker' => new Klinik_Nav_Walker()
             ));
             ?>
             <!-- Fallback menu in case WordPress menu doesn't load -->
             <div class="fallback-menu">
-                <ul class="flex flex-col items-start gap-6 text-xl text-white font-semibold">
+                <ul class="flex flex-col items-start gap-3 lg:gap-6 text-xl text-white font-semibold">
                     <li><a href="<?php echo esc_url(home_url('/')); ?>">Hem</a></li>
                     <li><a href="<?php echo esc_url(home_url('/om-oss')); ?>">Om oss</a></li>
                     <li><a href="<?php echo esc_url(home_url('/kontakt')); ?>">Kontakt</a></li>
