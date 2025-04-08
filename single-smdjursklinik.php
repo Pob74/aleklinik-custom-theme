@@ -65,7 +65,7 @@
             'post_parent' => '260', // Changed from 241 to 260 for smådjursklinik
             'posts_per_page' => 100,
             'order' => 'ASC',
-            'orderby' => 'menu_order title'
+            'orderby' => 'title'
           );
           $query_tips = new WP_Query($args_tips);
           if ($query_tips->have_posts()):

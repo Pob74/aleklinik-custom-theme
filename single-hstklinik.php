@@ -24,7 +24,7 @@
                   'post_parent' => '109',
                   'posts_per_page' => 100,
                   'order' => 'ASC',
-                  'orderby' => 'menu_order title'
+                  'orderby' => 'title'
                 );
                 $query_horse = new WP_Query($args_horse);
 
