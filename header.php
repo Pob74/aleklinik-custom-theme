@@ -25,16 +25,7 @@
     <?php endif; ?>
 
     <?php wp_head(); ?>
-    <style>
-        /* Mobile menu styling */
-        #nav-menu { background-color: #1f2937; } /* bg-gray-900 equivalent */
-        /* Removed forced white color to fix visibility issue */
-        #nav-menu svg { color: white !important; }
-        #nav-menu .menu-item { margin-bottom: 1.5rem; }
-        #nav-menu .sub-menu { margin-top: 0.75rem; margin-left: 1.5rem; }
-        #nav-menu .sub-menu .menu-item { margin-bottom: 0.75rem; }
-        #nav-menu ul, #nav-menu li { color: white !important; }
-    </style>
+    
 </head>
 <body <?php body_class(); ?>>
 <?php do_action('wp_body_open'); ?>
