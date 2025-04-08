@@ -30,34 +30,52 @@
 <?php do_action('wp_body_open'); ?>
 
 <header id="header" class="sticky top-0 w-full z-50 px-6 py-4 transition-all duration-300 ease-in-out bg-white/95 backdrop-blur-md border-b border-gray-100/80">
-    <nav class="container mx-auto flex items-center justify-between">
-        <!-- Logo -->
-        <a href="<?php echo esc_url(home_url('/')); ?>" class="z-50">
-            <div class="w-32 h-16">
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/logo-sm.png" alt="Logo" class="w-full h-full object-contain">
-            </div>
-        </a>
+    <div class="container mx-auto">
+        <nav class="flex items-center justify-between relative">
+            <!-- Logo -->
+            <a href="<?php echo esc_url(home_url('/')); ?>" class="z-50">
+                <div class="w-32 h-16">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/logo-sm.png" alt="Logo" class="w-full h-full object-contain">
+                </div>
+            </a>
 
-        <!-- Mobile menu button -->
-        <button id="mobile-menu-button" class="lg:hidden z-50 p-2 rounded-lg hover:bg-gray-100 transition-colors">
-            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-        </button>
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-button" class="lg:hidden z-50 p-2 rounded-lg hover:bg-gray-100 transition-colors fixed right-6 top-6">
+                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
 
-        <!-- Navigation Menu -->
-        <div id="nav-menu" class="fixed lg:static inset-0 bg-white lg:bg-transparent transform lg:transform-none transition-all duration-300 ease-in-out translate-x-full lg:translate-x-0 h-full lg:h-auto overflow-y-auto lg:overflow-visible">
-            <div class="container mx-auto px-6 py-8 lg:p-0">
+            <!-- Desktop Navigation Menu -->
+            <div class="hidden lg:block">
                 <?php
                 wp_nav_menu(array(
                     'theme_location' => 'primary_menu',
                     'container' => false,
-                    'menu_class' => 'flex flex-col lg:flex-row items-start lg:items-center lg:justify-end gap-6 lg:gap-12',
+                    'menu_class' => 'flex items-center justify-end gap-12',
                     'fallback_cb' => false,
                     'walker' => new Klinik_Nav_Walker()
                 ));
                 ?>
             </div>
+        </nav>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <div id="nav-menu" class="fixed lg:hidden inset-0 bg-white transform transition-transform duration-300 ease-in-out translate-x-full z-40">
+        <div class="container mx-auto px-6 py-16 h-full">
+            <?php
+            wp_nav_menu(array(
+                'theme_location' => 'primary_menu',
+                'container' => false,
+                'menu_class' => 'flex flex-col items-start gap-6 text-white',
+                'fallback_cb' => false,
+                'walker' => new Klinik_Nav_Walker()
+            ));
+            ?>
         </div>
-    </nav>
+    </div>
 </header>
+
+<!-- Mobile menu overlay -->
+<div id="mobile-menu-overlay" class="fixed inset-0 bg-black/80 z-30 lg:hidden opacity-0 pointer-events-none transition-opacity duration-300"></div>
