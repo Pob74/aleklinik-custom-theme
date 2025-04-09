@@ -132,7 +132,7 @@
 </footer>
 
 <!-- Mobile Navigation Menu -->
-<div id="nav-menu" class="fixed lg:hidden right-0 top-0 bottom-0 w-[30%] bg-gray-900 transform transition-transform duration-300 ease-in-out translate-x-full z-[55] overflow-auto">
+<div id="nav-menu" class="fixed lg:hidden right-0 top-0 bottom-0 w-[90%] bg-gray-900 transform transition-transform duration-300 ease-in-out translate-x-full z-[55] overflow-auto">
     
 
     <div class="container mx-auto px-6 pt-24 h-full overflow-y-auto">

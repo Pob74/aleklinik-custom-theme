@@ -17,7 +17,7 @@ if (have_rows('staff')): ?>
                     <div class="bg-white overflow-hidden rounded-lg shadow-lg">
                         <!-- Top Section with Image and Title -->
                         <div class="border-b border-gray-200">
-                            <div class="flex items-center p-6">
+                            <div class="flex-col lg:flex lg:flex-row  lg:items-center p-6">
                                 <!-- Image -->
                                 <div class="w-32 h-32 flex-shrink-0 mr-6">
                                     <?php if ($image): ?>
