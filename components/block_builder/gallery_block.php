@@ -32,13 +32,13 @@ switch ($columns) {
         <?php if ($section_title || $section_description): ?>
             <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16">
                 <?php if ($section_title): ?>
-                    <h2 class="text-3xl md:text-4xl font-semibold text-slate-800 mb-4"><?php echo esc_html($section_title); ?></h2>
+                    <h2 class="text-3xl md:text-4xl font-light text-slate-800 mb-8"><?php echo esc_html($section_title); ?></h2>
                 <?php endif; ?>
                 <?php if ($section_description): ?>
                     <div class="text-xl text-gray-600 text-center mb-16 max-w-4xl mx-auto">
                         <?php
                             
-                            echo wpautop($section_description);
+                            echo wp_kses_post($section_description);
                         ?>
                     </div>
                 <?php endif; ?>

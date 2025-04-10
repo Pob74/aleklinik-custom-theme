@@ -12,6 +12,7 @@ require_once get_template_directory() . '/support/enqueue.php';
 require_once get_template_directory() . '/support/blocks.php';
 require_once get_template_directory() . '/support/theme-setup.php';
 
+
 // Add theme support for post thumbnails
 add_theme_support('post-thumbnails');
 

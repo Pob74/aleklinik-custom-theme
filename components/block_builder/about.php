@@ -16,12 +16,12 @@ $team = get_sub_field('team_section');
 
         <!-- Section title -->
         <div class="text-center mb-16">
-            <h2 class="text-4xl md:text-4xl font-bold text-gray-900"><?php echo esc_html($title); ?></h2>
+            <h2 class="text-4xl md:text-4xl font-bold text-gray-900"><?= esc_html($title); ?></h2>
         </div>
             
             <!-- Introduction -->
             <div class="max-w-7xl mb-20 mx-auto prose prose-xl text-gray-600">
-                <?php echo wp_kses_post($section_intro); ?>
+                <?= wp_kses_post($section_intro); ?>
             </div>
 
             <!-- Facilities Section -->
@@ -34,12 +34,12 @@ $team = get_sub_field('team_section');
             <div class="grid md:grid-cols-2 gap-16 items-center mb-24">
                
                 <div class="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
-                    <img src="<?php echo esc_url($facility_image['url']);?>" alt="<?php echo esc_attr($facility_image['alt']);?>" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="<?= esc_url($facility_image['url']);?>" alt="<?= esc_attr($facility_image['alt']);?>" class="absolute inset-0 w-full h-full object-cover">
                 </div>
                 <div>
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6"><?php echo esc_html($facility['facilities_title']); ?></h2>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6"><?= esc_html($facility['facilities_title']); ?></h2>
                     <div class="prose prose-lg text-gray-600">
-                        <?php echo wp_kses_post($facility['facilities_description']); ?>
+                        <?= wp_kses_post($facility['facilities_description']); ?>
                     </div>
                 </div> 
             </div>
