@@ -7,6 +7,7 @@
     $image = get_sub_field('image'); // Returns image array or false
     $image_position = get_sub_field('image_position') ?: 'left'; // Default to 'left' if not set
     $content = get_sub_field('content'); // WYSIWYG content
+    $section_color = get_sub_field('background_color') ?: 'bg-gray-50';
 
 
     // Determine grid classes based on image presence
@@ -14,7 +15,7 @@
     $text_col_span_class = $image ? '' : 'md:col-span-1'; // Text spans 1 if no image (already in 1-col grid)
 
 ?>
-<section class="image-text-block py-16 md:py-24 bg-gray-50 "> 
+<section class="image-text-block py-16 md:py-24 <?php echo $section_color; ?> "> 
     <div class="max-w-7xl mx-auto px-4">
 
         <?php // Optional Section Header ?>
@@ -24,7 +25,7 @@
                     <h2 class="text-3xl md:text-4xl font-semibold text-slate-800 mb-4"><?php echo esc_html($section_title); ?></h2>
                 <?php endif; ?>
                 <?php if ($section_description): ?>
-                    <div class="text-slate-600 text-lg prose prose-slate max-w-none">
+                    <div class="text-xl text-gray-600 text-center mb-16 max-w-4xl mx-auto">
                         <?php echo wpautop($section_description); // Use wpautop for textarea, or just echo if WYSIWYG ?>
                     </div>
                 <?php endif; ?>
