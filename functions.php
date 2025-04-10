@@ -1,11 +1,14 @@
 <?php
 
-// Include the custom nav walker
-require_once get_template_directory() . '/inc/class-klinik-nav-walker.php';
+
 
 // Exit if accessed directly
 if (! defined('ABSPATH'))
     exit;
+
+    
+// Include the custom nav walker
+require_once get_template_directory() . '/inc/class-klinik-nav-walker.php';
 
 require_once get_template_directory() . '/support/register-post-type.php';
 require_once get_template_directory() . '/support/enqueue.php';
