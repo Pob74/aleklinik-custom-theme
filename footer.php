@@ -90,16 +90,16 @@
                     
                     if($contact_info): ?>
                     <div>
-                        <p class="font-medium"><?php echo  $contact_info['telefontid_hastveterinar_text'] ?: 'Debug info'; ?></p>
-                        <p><?php echo $contact_info['days_and_time'] ?: 'Debug info'; ?></p>
-                        <p class="hover:text-blue-600 transition-colors"><?php echo $contact_info['telefon'] ?: 'Debug info'; ?></p>
+                        <p class="font-medium"><?php echo  $contact_info['telefontid_hastveterinar_text'] ?: 'Telefontid hästvetärinar'; ?></p>
+                        <p><?php echo $contact_info['days_and_time'] ?: 'Mån - fre 8:30-9:00'; ?></p>
+                        <p class="hover:text-blue-600 transition-colors"><?php echo $contact_info['telefon'] ?: '0303-33 59 60'; ?></p>
                     </div>
                     <div class="mt-4">
-                        <p class="hover:text-blue-600 transition-colors"><?php echo $contact_info['epost'] ?: 'Debug info'; ?></p>
+                        <p class="hover:text-blue-600 transition-colors"><?php echo $contact_info['epost'] ?: 'hast@aledjurklinik.se'; ?></p>
                     </div>
                     <div class="mt-4">
                         <p class="font-medium"><?php echo get_field('emergency_title', 'option') ?: 'Hästakut:'; ?></p>
-                        <p class="hover:text-blue-600 transition-colors"><?php echo $contact_info['hastakut'] ?: 'Debug info'; ?></p>
+                        <p class="hover:text-blue-600 transition-colors"><?php echo $contact_info['hastakut'] ?: '0769-42 88 03'; ?></p>
                     </div>
                     <?php endif; ?>
                 </div>
