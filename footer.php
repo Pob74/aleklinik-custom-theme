@@ -12,7 +12,7 @@
                 <h3 class="text-xl font-semibold text-gray-800 mb-4">Öppettider</h3>
                 <div class="space-y-2">
                     <div class="text-gray-700">
-                        <h4 class="font-semibold">Hästklinik</h4>
+                        <p class="font-semibold">Hästklinik</p>
                         <?php if(have_rows('opening_hours_horse', 'option')): ?>
                             <?php while(have_rows('opening_hours_horse', 'option')): the_row(); ?>
                                 <p><?php echo get_sub_field('day'); ?>: <?php echo get_sub_field('time'); ?></p>
@@ -20,7 +20,7 @@
                         <?php endif; ?>
                     </div>
                     <div class="text-gray-700 mt-4">
-                        <h4 class="font-semibold">Smådjursklinik</h4>
+                        <p class="font-semibold">Smådjursklinik</p>
                         <?php if(have_rows('opening_hours_small-animals', 'option')): ?>
                             <?php while(have_rows('opening_hours_small-animals', 'option')): the_row(); ?>
                                 <p><?php echo get_sub_field('day'); ?>: <?php echo get_sub_field('time'); ?></p>

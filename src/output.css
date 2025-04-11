@@ -1,3 +1,77 @@
+/* montserrat-100 - latin */
+
+@font-face {
+  font-display: swap;
+
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+
+  font-family: "Montserrat";
+
+  font-style: normal;
+
+  font-weight: 100;
+
+  src: url("./assets/fonts/montserrat-v29-latin-100.woff2") format("woff2");
+
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* montserrat-300 - latin */
+
+@font-face {
+  font-display: swap;
+
+  font-family: "Montserrat";
+
+  font-style: normal;
+
+  font-weight: 300;
+
+  src: url("../assets/fonts/montserrat-v29-latin-300.woff2") format("woff2");
+}
+
+/* montserrat-regular - latin */
+
+@font-face {
+  font-display: swap;
+
+  font-family: "Montserrat";
+
+  font-style: normal;
+
+  font-weight: 400;
+
+  src: url("../assets/fonts/montserrat-v29-latin-regular.woff2") format("woff2");
+}
+
+/* montserrat-500 - latin */
+
+@font-face {
+  font-display: swap;
+
+  font-family: "Montserrat";
+
+  font-style: normal;
+
+  font-weight: 500;
+
+  src: url("../assets/fonts/montserrat-v29-latin-500.woff2") format("woff2");
+}
+
+/* montserrat-700 - latin */
+
+@font-face {
+  font-display: swap;
+
+  font-family: "Montserrat";
+
+  font-style: normal;
+
+  font-weight: 700;
+
+  src: url("../assets/fonts/montserrat-v29-latin-700.woff2") format("woff2");
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -106,9 +180,7 @@
   --tw-contain-style:  ;
 }
 
-/*
-! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com
-*/
+/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -1871,18 +1943,6 @@ video {
   --tw-prose-invert-pre-bg: rgb(0 0 0 / 50%);
   --tw-prose-invert-th-borders: #475569;
   --tw-prose-invert-td-borders: #334155;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
 }
 
 .pointer-events-none {

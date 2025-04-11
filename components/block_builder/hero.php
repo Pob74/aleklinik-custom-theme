@@ -1,9 +1,8 @@
 <?php
 $pre_title = get_sub_field('section_pre-title');
 $title = get_sub_field('section_title');
-$image = get_sub_field('section_image');
+$image = get_sub_field('section_image'); // IMPORTANT: Ensure this field returns an IMAGE ARRAY in ACF settings
 $show_latest_post = get_sub_field('show_latest_post');
-
 
 // Get latest post if option is enabled
 $latest_post = null;
@@ -13,14 +12,36 @@ if ($show_latest_post) {
         'post_status' => 'publish'
     ));
 }
+
+// Define attributes for the hero image for optimization
+$hero_image_attributes = [];
+if ( $image ) { // Check if $image exists before trying to access its properties
+    $hero_image_attributes = [
+        'class' => 'w-full h-full object-cover', // Your existing layout classes
+        'fetchpriority' => 'high',              // Prioritize loading for LCP
+        'loading' => 'eager',                   // Explicitly ensure it's not lazy-loaded
+        // 'alt' is handled automatically by wp_get_attachment_image from Media Library data
+    ];
+}
 ?>
 
 <div class="relative h-[70vh] w-full overflow-hidden">
-    <!-- Placeholder background image -->
-    <div class="absolute inset-0 bg-gray-400">
-        <?php if ($image) : ?>
-            <img src="<?= esc_url($image['url']); ?>" alt="<?= esc_attr($image['alt']); ?>" class="w-full h-full object-cover">
-        <?php endif; ?>
+    <!-- Placeholder background image container -->
+    <div class="absolute inset-0 bg-gray-400"> 
+        <?php
+        // Check if the image array and ID exist before outputting
+        if ( $image && ! empty( $image['id'] ) ) :
+
+            // Use wp_get_attachment_image for the hero image
+            echo wp_get_attachment_image(
+                $image['id'],           // The attachment ID from the ACF array
+                'full',                 // Use 'full' or another appropriate large size for hero
+                false,                  // No icon fallback
+                $hero_image_attributes  // Pass the attributes array with optimizations
+            );
+
+        endif;
+        ?>
     </div>
 
     <!-- Dark overlay for better text visibility -->

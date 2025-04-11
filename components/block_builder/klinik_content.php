@@ -28,9 +28,11 @@ $features = get_sub_field('feature'); // Ensure 'adventure' is the correct field
                             $feature_link = $feature['feature_link']; 
                             if ($feature_link): 
                                 $feature_url = is_a($feature_link, 'WP_Post') ? get_permalink($feature_link) : $feature_link;
+                                $aria_label = $feature['feature_title'] . " läs mer om " . $feature['feature_title'];
+                                
                             ?>
-                                <a href="<?= esc_url($feature_url); ?>" class="inline-flex items-center text-gray-900 hover:text-gray-600 transition-colors duration-200">
-                                    Läs mer
+                                <a href="<?= esc_url($feature_url); ?>" aria-label="<?= esc_attr($aria_label); ?>" class="inline-flex items-center text-gray-900 hover:text-gray-600 transition-colors duration-200">
+                                    Läs mer om tjänsten
                                     <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                     </svg>
