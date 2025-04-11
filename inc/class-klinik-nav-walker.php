@@ -7,7 +7,7 @@ class Klinik_Nav_Walker extends Walker_Nav_Menu {
     public function start_lvl(&$output, $depth = 0, $args = null) {
         $indent = str_repeat("\t", $depth);
         // Add data-visible attribute for tablet toggle
-        $output .= "\n$indent<ul class=\"sub-menu bg-white rounded-md shadow-lg py-2 mt-1 lg:group-hover:block\" data-visible=\"false\">\n";
+        $output .= "\n$indent<ul class=\"sub-menu bg-white rounded-md shadow-lg py-2 mt-1 lg:group-hover:block\" data-visible=\"false\" >\n";
     }
 
     /**
@@ -92,14 +92,17 @@ class Klinik_Nav_Walker extends Walker_Nav_Menu {
         // Add dropdown toggle button for items with children
         if ($args->walker->has_children && $depth === 0) {
             // Add tablet/mobile toggle button
-            $item_output .= '<button class="submenu-toggle ml-2 p-2 focus:outline-none hidden md:block lg:hidden">
+            $item_output .= '<button class="submenu-toggle ml-2 p-2 focus:outline-none hidden md:block lg:hidden" 
+                aria-label="Öppna undermeny för ' . esc_attr($title) . '"
+                aria-expanded="false"
+                aria-controls="submenu-' . esc_attr($item->ID) . '">
                 <svg class="h-4 w-4 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
             </button>';
             
             // Add desktop dropdown arrow (visible only on desktop)
-            $item_output .= '<svg class="hidden lg:block ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            $item_output .= '<svg class="hidden lg:block ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" ">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>';
             
