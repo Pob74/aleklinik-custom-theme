@@ -62,7 +62,7 @@ switch ($columns) {
                             <?php
                             echo wp_get_attachment_image(
                                 $image['ID'],
-                                'large', // Use 'large' or a suitable size like 'medium_large' or a custom thumbnail size
+                                'medium_large', // Use 'large' or a suitable size like 'medium_large' or a custom thumbnail size
                                 false, // No icon
                                 [
                                     'alt'   => $final_image_alt,

@@ -15,11 +15,11 @@ $features = get_sub_field('feature'); // Ensure 'adventure' is the correct field
                     <div class="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div class="relative h-80 overflow-hidden rounded-t-xl">
                             <?php 
-                            $image = $feature['feature_image']['url'];
+                            $image = $feature['feature_image']['id'];
                             ?>
-                            <img src="<?= esc_url($image); ?>" 
-                                 alt="<?= esc_attr($feature['feature_title']); ?>" 
-                                 class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105">
+                            <?php if (!empty($image)) : ?>
+                                <?php echo wp_get_attachment_image($image, 'medium_large', false, array('class' => 'w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105')); ?>
+                            <?php endif; ?>
                         </div>
                         <div class="p-8">
                             <h3 class="text-2xl font-light text-gray-900 mb-4"><?= esc_html($feature['feature_title']); ?></h3>

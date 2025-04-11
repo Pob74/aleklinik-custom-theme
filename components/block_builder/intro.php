@@ -17,11 +17,13 @@ $small_animal_clinic = get_sub_field('small_animal_clinic');
         <!-- Horse Clinic Section -->
         <div class="flex flex-col md:flex-row items-center mb-20 gap-8 md:gap-12">
             <!-- Image Column -->
+           
             <div class="w-full md:w-1/2 rounded-xl overflow-hidden shadow-lg">
-                <img src="<?= esc_url($horse_clinic['image']['url']); ?>"
-                    alt="<?= esc_attr($horse_clinic['label']); ?>"
-                    class="w-full h-96 object-cover">
+                 <?php if (!empty($horse_clinic['image']['id'])) : ?>
+                        <?php echo wp_get_attachment_image($horse_clinic['image']['id'], 'medium_large', false, array('class' => 'w-full h-96 object-cover')); ?>
+                    <?php endif; ?>
             </div>
+            
 
             <!-- Content Column -->
             <div class="w-full md:w-1/2">
@@ -55,9 +57,9 @@ $small_animal_clinic = get_sub_field('small_animal_clinic');
         <div class="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12">
             <!-- Image Column -->
             <div class="w-full md:w-1/2 rounded-xl overflow-hidden shadow-lg">
-                <img src="<?= esc_url($small_animal_clinic['image']['url']); ?>"
-                    alt="<?= esc_attr($small_animal_clinic['label']); ?>"
-                    class="w-full h-96 object-cover">
+                <?php if (!empty($small_animal_clinic['image']['id'])) : ?> 
+                    <?php echo wp_get_attachment_image($small_animal_clinic['image']['id'], 'medium_large', false, array('class' => 'w-full h-96 object-cover')); ?>
+                <?php endif; ?>
             </div>
 
             <!-- Content Column -->

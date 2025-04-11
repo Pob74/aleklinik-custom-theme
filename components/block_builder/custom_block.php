@@ -46,7 +46,7 @@
 
                         echo wp_get_attachment_image(
                             $image['ID'],
-                            'large', // Use 'large' or your custom size like 'content-area-image'
+                            'medium_large', // Use 'large' or your custom size like 'content-area-image'
                             false,
                             [
                                 'alt'   => $final_image_alt,
