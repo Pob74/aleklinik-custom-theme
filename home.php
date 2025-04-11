@@ -76,6 +76,10 @@
                                 }
                                 ?>
                             </div>
+                            <?php 
+                // Display blocks (needed for staff section)
+                display_blocks(get_the_ID()); 
+                ?>
 
                             <!-- Read More Link -->
                             <div class="mt-auto">

@@ -49,7 +49,10 @@
                         </div>
                     </div>
                 <?php endif; ?>
-
+<?php 
+                // Display blocks (needed for staff section)
+                display_blocks(get_the_ID()); 
+                ?>
                 <!-- Navigation -->
                 <nav class="mt-12 pt-6 border-t border-gray-200">
                     <div class="flex flex-col sm:flex-row justify-between gap-4">

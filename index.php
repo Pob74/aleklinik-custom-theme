@@ -2,7 +2,7 @@
 
 get_header(); 
 ?>
-<div >
+<div > 
     <h1 class="text-red-800">This is the index php file</h1>
 </div>
 
