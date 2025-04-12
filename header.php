@@ -34,11 +34,21 @@
     <div class="container mx-auto">
         <nav class="flex items-center justify-between relative">
             <!-- Logo -->
-            <a href="<?php echo esc_url(home_url('/')); ?>" class="z-50">
-                <div class="w-32 h-16">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/logo-sm.png" alt="Logo" class="w-full h-full object-contain">
-                </div>
-            </a>
+            <?php
+            // Check if a custom logo is set and the function exists
+            if ( function_exists( 'the_custom_logo' ) && has_custom_logo() ) {
+                // Output the custom logo with its link
+                // Note: the_custom_logo() outputs the <a> and <img> tag itself.
+                // We add the 'z-50' class using a filter if needed, or adjust CSS.
+                // For now, let's rely on CSS targeting '.custom-logo-link'.
+                the_custom_logo();
+            } else {
+                // Fallback: Display the site title as a link if no logo is set
+                // We add the 'z-50' class here to match your original structure.
+                echo '<a href="' . esc_url( home_url( '/' ) ) . '" rel="home" class="site-title-link z-50">' . get_bloginfo( 'name' ) . '</a>';
+            }
+            ?>
+
 
             <!-- Mobile menu button -->
             <button id="mobile-menu-button" aria-label="Meny" class="lg:hidden z-50 p-2 rounded-lg hover:bg-gray-100 transition-colors fixed right-6 top-6">

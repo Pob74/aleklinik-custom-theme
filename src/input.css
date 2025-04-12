@@ -152,3 +152,24 @@
     display: block !important;
   }
 }
+.custom-logo-link {
+  display: inline-block; /* Or block depending on layout */
+  position: relative; /* Needed if you apply z-index */
+  z-index: 50; /* Apply the z-index here */
+}
+.custom-logo {
+  width: 8rem; /* w-32 equivalent */
+  height: 4rem; /* h-16 equivalent */
+  object-fit: contain;
+  display: block; /* Usually good for images */
+}
+/* Style for the text fallback link */
+.site-title-link {
+  display: inline-block; /* Or block */
+  z-index: 50;
+  /* Add font size, weight, color etc */
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333; /* Example color */
+}

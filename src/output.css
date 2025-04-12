@@ -2179,10 +2179,6 @@ video {
   aspect-ratio: 1 / 1;
 }
 
-.h-16 {
-  height: 4rem;
-}
-
 .h-24 {
   height: 6rem;
 }
@@ -2646,11 +2642,6 @@ video {
 
 .to-white {
   --tw-gradient-to: #fff var(--tw-gradient-to-position);
-}
-
-.object-contain {
-  -o-object-fit: contain;
-     object-fit: contain;
 }
 
 .object-cover {
@@ -3180,6 +3171,40 @@ video {
   .menu-item-has-children:hover > .sub-menu {
     display: block !important;
   }
+}
+
+.custom-logo-link {
+  display: inline-block;
+  /* Or block depending on layout */
+  position: relative;
+  /* Needed if you apply z-index */
+  z-index: 50;
+  /* Apply the z-index here */
+}
+
+.custom-logo {
+  width: 8rem;
+  /* w-32 equivalent */
+  height: 4rem;
+  /* h-16 equivalent */
+  -o-object-fit: contain;
+     object-fit: contain;
+  display: block;
+  /* Usually good for images */
+}
+
+/* Style for the text fallback link */
+
+.site-title-link {
+  display: inline-block;
+  /* Or block */
+  z-index: 50;
+  /* Add font size, weight, color etc */
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+  /* Example color */
 }
 
 @media (min-width: 1024px) {
