@@ -34,7 +34,9 @@ $team = get_sub_field('team_section');
             <div class="grid md:grid-cols-2 gap-16 items-center mb-24">
                
                 <div class="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
-                    <img src="<?= esc_url($facility_image['url']);?>" alt="<?= esc_attr($facility_image['alt']);?>" class="absolute inset-0 w-full h-full object-cover">
+                    <?php if ($facility_image): ?>
+                    <?php echo wp_get_attachment_image($facility_image['ID'], 'medium_large', false, array('class' => 'w-full h-full object-cover')); ?>
+                    <?php endif; ?>
                 </div>
                 <div>
                     <h2 class="text-3xl font-bold text-gray-900 mb-6"><?= esc_html($facility['facilities_title']); ?></h2>
