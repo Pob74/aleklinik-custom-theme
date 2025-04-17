@@ -82,7 +82,7 @@ class Klinik_Nav_Walker extends Walker_Nav_Menu {
         
         // Create a wrapper div for link and button if has children
         if ($args->walker->has_children && $depth === 0) {
-            $item_output .= '<div class="flex items-center">';
+            $item_output .= '<div class="flex items-center' . ($is_active ? ' active' : '') . '">';
         }
         
         $item_output .= '<a' . $attributes . '>';
@@ -102,7 +102,7 @@ class Klinik_Nav_Walker extends Walker_Nav_Menu {
             </button>';
             
             // Add desktop dropdown arrow (visible only on desktop)
-            $item_output .= '<svg class="hidden lg:block ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" ">
+            $item_output .= '<svg class="hidden lg:block ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>';
             

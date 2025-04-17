@@ -3090,7 +3090,9 @@ video {
 /* Active link styles */
 
 .current-menu-item > a,
-.current-menu-parent > a {
+.current-menu-parent > a,
+.main-menu-item.active > a,
+.flex.items-center.active > a {
   color: #6b7280 !important;
   font-weight: 600 !important;
   text-decoration: underline;
@@ -3227,6 +3229,16 @@ video {
   text-decoration: none;
   color: #333;
   /* Example color */
+}
+
+/* Ensure submenu items are properly styled */
+
+.menu-item-has-children > a {
+  position: relative;
+}
+
+.menu-item-has-children.active > a {
+  text-decoration: underline;
 }
 
 @media (min-width: 1024px) {
