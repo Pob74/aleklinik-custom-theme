@@ -77,7 +77,7 @@ $gallery_id = 'gallery-' . uniqid();
                             );
                             ?>
                             <?php if ($index === $max_visible - 1 && $total_images > $max_visible): ?>
-                                <span class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-60 rounded-lg text-white text-2xl font-bold pointer-events-none">
+                                <span class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-20 rounded-lg text-white text-2xl font-bold pointer-events-none">
                                     +<?php echo $total_images - $max_visible; ?>
                                 </span>
                             <?php endif; ?>
