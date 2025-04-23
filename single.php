@@ -1,9 +1,10 @@
 <?php get_header(); ?>
 
 <main class="py-12 lg:py-20">
+
     <div class="container mx-auto px-6">
         <?php while (have_posts()) : the_post(); ?>
-           
+
             <article class="max-w-4xl mx-auto">
                 <!-- Post Header -->
                 <header class="mb-12">
@@ -17,8 +18,8 @@
                         <time datetime="<?php echo get_the_date('c'); ?>">
                             <?php echo get_the_date(); ?>
                         </time>
-                        <span class="mx-2">•</span>
-                        <span><?php echo get_the_author(); ?></span>
+
+
                     </div>
                 </header>
 
@@ -49,9 +50,9 @@
                         </div>
                     </div>
                 <?php endif; ?>
-<?php 
+                <?php
                 // Display blocks (needed for staff section)
-                display_blocks(get_the_ID()); 
+                display_blocks(get_the_ID());
                 ?>
                 <!-- Navigation -->
                 <nav class="mt-12 pt-6 border-t border-gray-200">
