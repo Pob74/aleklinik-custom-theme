@@ -2367,8 +2367,16 @@ video {
   align-items: flex-start;
 }
 
+.items-end {
+  align-items: flex-end;
+}
+
 .items-center {
   align-items: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
 }
 
 .justify-end {
@@ -2889,6 +2897,10 @@ video {
 
 .pt-8 {
   padding-top: 2rem;
+}
+
+.pr-4 {
+  padding-right: 1rem;
 }
 
 .text-left {
