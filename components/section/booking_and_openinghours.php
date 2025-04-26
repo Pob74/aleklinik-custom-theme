@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Opening Hours and Booking Block
  */
@@ -17,22 +18,22 @@
               <h4 class="text-xl mb-4">Hästklinik</h4>
 
               <?php
-              if(have_rows('boking_horse', 'option')):
-                while(have_rows('boking_horse', 'option')): the_row();
+              if (have_rows('boking_horse', 'option')):
+                while (have_rows('boking_horse', 'option')): the_row();
                   $telefonummer = get_sub_field('phone-number_horse');
-                  ?>
+              ?>
                   <p class="text-lg font-medium mb-3"><?php echo esc_html($telefonummer); ?></p>
                   <?php
-                  if(have_rows('phone-hours', 'option')):
-                    while(have_rows('phone-hours', 'option')): the_row();
+                  if (have_rows('phone-hours', 'option')):
+                    while (have_rows('phone-hours', 'option')): the_row();
                       $dag = get_sub_field('day');
                       $tid = get_sub_field('time');
-                      ?>
+                  ?>
                       <div class="flex justify-between items-center mb-2">
                         <p class="text-sm"><?php echo esc_html($dag); ?></p>
                         <p class="text-sm"><?php echo esc_html($tid); ?></p>
                       </div>
-                      <?php
+              <?php
                     endwhile;
                   endif;
                 endwhile;
@@ -45,22 +46,22 @@
               <h4 class="text-xl mb-4">Smådjursklinik</h4>
 
               <?php
-              if(have_rows('boking_small-animals', 'option')):
-                while(have_rows('boking_small-animals', 'option')): the_row();
+              if (have_rows('boking_small-animals', 'option')):
+                while (have_rows('boking_small-animals', 'option')): the_row();
                   $telefonummer = get_sub_field('phone-number_small-animals');
-                  ?>
+              ?>
                   <p class="text-lg font-medium mb-3"><?php echo esc_html($telefonummer); ?></p>
                   <?php
-                  if(have_rows('phone-hours', 'option')):
-                    while(have_rows('phone-hours', 'option')): the_row();
+                  if (have_rows('phone-hours', 'option')):
+                    while (have_rows('phone-hours', 'option')): the_row();
                       $dag = get_sub_field('day');
                       $tid = get_sub_field('time');
-                      ?>
+                  ?>
                       <div class="flex justify-between items-center mb-2">
                         <p class="text-sm"><?php echo esc_html($dag); ?></p>
                         <p class="text-sm"><?php echo esc_html($tid); ?></p>
                       </div>
-                      <?php
+              <?php
                     endwhile;
                   endif;
                 endwhile;
@@ -81,16 +82,16 @@
               <h4 class="text-xl mb-4">Hästklinik</h4>
 
               <?php
-              if(have_rows('opening_hours_horse', 'option')):
-                while(have_rows('opening_hours_horse', 'option')): the_row();
+              if (have_rows('opening_hours_horse', 'option')):
+                while (have_rows('opening_hours_horse', 'option')): the_row();
                   $dag = get_sub_field('day');
                   $tid = get_sub_field('time');
-                  ?>
+              ?>
                   <div class="flex justify-between items-center mb-2">
                     <p class="text-sm"><?php echo esc_html($dag); ?></p>
                     <p class="text-sm"><?php echo esc_html($tid); ?></p>
                   </div>
-                  <?php
+              <?php
                 endwhile;
               endif;
               ?>
@@ -101,16 +102,16 @@
               <h4 class="text-xl mb-4">Smådjursklinik</h4>
 
               <?php
-              if(have_rows('opening_hours_small-animals', 'option')):
-                while(have_rows('opening_hours_small-animals', 'option')): the_row();
+              if (have_rows('opening_hours_small-animals', 'option')):
+                while (have_rows('opening_hours_small-animals', 'option')): the_row();
                   $dag = get_sub_field('day');
                   $tid = get_sub_field('time');
-                  ?>
+              ?>
                   <div class="flex justify-between items-center mb-2">
                     <p class="text-sm"><?php echo esc_html($dag); ?></p>
                     <p class="text-sm"><?php echo esc_html($tid); ?></p>
                   </div>
-                  <?php
+              <?php
                 endwhile;
               endif;
               ?>
