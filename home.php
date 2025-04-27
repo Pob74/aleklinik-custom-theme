@@ -1,11 +1,26 @@
 <?php get_header(); ?>
 
 <main class="min-h-screen bg-white relative z-0 font-montserrat">
+    <?php
+    // Display blocks using the actual blog page ID
+    $blog_page_id = get_option('page_for_posts');
+    $has_blocks = false;
 
+    if ($blog_page_id) {
+        // Check if the blog page has any blocks
+        if (have_rows('section', $blog_page_id)) {
+            $has_blocks = true;
+            // Display the blocks
+            display_blocks($blog_page_id);
+        }
+    }
+    ?>
     <div class="w-full bg-gray-50 py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Page Title -->
-            <h1 class="text-4xl font-bold text-gray-900 mb-12 text-center font-montserrat">Aktuellt</h1>
+            <?php if (!$has_blocks) : ?>
+                <!-- Page Title - Only shown if no blocks are displayed -->
+                <h1 class="text-4xl font-bold text-gray-900 mb-12 text-center font-montserrat">Aktuellt</h1>
+            <?php endif; ?>
 
             <div class="grid gap-12 md:grid-cols-2 ">
                 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
