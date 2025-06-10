@@ -1,15 +1,17 @@
 <?php
 
 // Custom post type
-function create_posttype_horse() {
+function create_posttype_horse()
+{
 
-    register_post_type( 'Hästklinik',
-    // CPT Options
+    register_post_type(
+        'Hästklinik',
+        // CPT Options
         array(
-          'hierarchical' => true,
+            'hierarchical' => true,
             'labels' => array(
-                'name' => __( 'Hästklinik' ),
-                'singular_name' => __( 'Hästklinik' )
+                'name' => __('Hästklinik'),
+                'singular_name' => __('Hästklinik')
             ),
             'supports' => array(
                 'title',
@@ -24,18 +26,20 @@ function create_posttype_horse() {
     );
 }
 // Hooking up our function to theme setup
-add_action( 'init', 'create_posttype_horse' );
+add_action('init', 'create_posttype_horse');
 
 // Custom post type
-function create_posttype_animal() {
+function create_posttype_animal()
+{
 
-    register_post_type( 'Smådjursklinik',
-    // CPT Options
+    register_post_type(
+        'Smådjursklinik',
+        // CPT Options
         array(
-          'hierarchical' => true,
+            'hierarchical' => true,
             'labels' => array(
-                'name' => __( 'Smådjur' ),
-                'singular_name' => __( 'Smådjur' )
+                'name' => __('Smådjur'),
+                'singular_name' => __('Smådjur')
             ),
             'supports' => array(
                 'title',
@@ -50,4 +54,6 @@ function create_posttype_animal() {
     );
 }
 // Hooking up our function to theme setup
-add_action( 'init', 'create_posttype_animal' );
+add_action('init', 'create_posttype_animal');
+
+add_filter('wp_sitemaps_enabled', '__return_true');
