@@ -4,7 +4,6 @@
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="index, follow">
     
     <title><?php
         if (is_front_page()) {
@@ -18,11 +17,48 @@
         }
     ?></title>
 
-    <?php if (is_singular() && has_excerpt()) : ?>
-        <meta name="description" content="<?php echo esc_attr(get_the_excerpt()); ?>">
-    <?php else : ?>
-        <meta name="description" content="<?php bloginfo('description'); ?>">
-    <?php endif; ?>
+    <?php
+    // Only output meta tags if Yoast SEO is not active
+    // This prevents duplicate meta tags
+    if (!function_exists('yoast_breadcrumb')) {
+        // Add robots meta tag
+        ?>
+        <meta name="robots" content="index, follow">
+        <?php
+        
+        // First check for a custom meta_description field
+        $meta_description = '';
+        
+        if (is_singular()) {
+            // Try to get a custom meta description field
+            $meta_description = get_field('meta_description');
+            
+            // If no custom meta description, try to get first paragraph of content for posts
+            if (!$meta_description) {
+                // Get the first paragraph from content if available
+                $post_content = get_post_field('post_content', get_the_ID());
+                if ($post_content) {
+                    $post_content = strip_tags($post_content);
+                    $post_content = wp_trim_words($post_content, 30, '...');
+                    if ($post_content) {
+                        $meta_description = $post_content;
+                    }
+                }
+            }
+            
+            // If we still don't have a description and there's an excerpt, use that
+            if (!$meta_description && has_excerpt()) {
+                $meta_description = get_the_excerpt();
+            }
+        }
+        
+        // If we still don't have a description, use the site description
+        if (!$meta_description) {
+            $meta_description = get_bloginfo('description');
+        }
+        ?>
+        <meta name="description" content="<?php echo esc_attr($meta_description); ?>">
+    <?php } ?>
 
     <?php wp_head(); ?>
     
