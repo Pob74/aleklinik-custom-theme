@@ -2251,6 +2251,10 @@ video {
   max-height: 70vh;
 }
 
+.max-h-36 {
+  max-height: 9rem;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -3839,6 +3843,10 @@ video {
     display: block;
   }
 
+  .md\:flex {
+    display: flex;
+  }
+
   .md\:w-1\/2 {
     width: 50%;
   }
@@ -3970,6 +3978,14 @@ video {
     height: 10rem;
   }
 
+  .lg\:h-auto {
+    height: auto;
+  }
+
+  .lg\:max-h-40 {
+    max-height: 10rem;
+  }
+
   .lg\:w-1\/2 {
     width: 50%;
   }
@@ -4038,11 +4054,6 @@ video {
 
   .xl\:gap-12 {
     gap: 3rem;
-  }
-
-  .xl\:py-20 {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
   }
 
   .xl\:py-16 {

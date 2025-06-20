@@ -15,7 +15,7 @@ if ($show_latest_post) {
 
 // Define attributes for the hero image for optimization
 $hero_image_attributes = [];
-if ( $image ) { // Check if $image exists before trying to access its properties
+if ($image) { // Check if $image exists before trying to access its properties
     $hero_image_attributes = [
         'class' => 'w-full h-full object-cover', // Your existing layout classes
         'fetchpriority' => 'high',              // Prioritize loading for LCP
@@ -27,10 +27,10 @@ if ( $image ) { // Check if $image exists before trying to access its properties
 
 <div class="relative h-[70vh] w-full overflow-hidden">
     <!-- Placeholder background image container -->
-    <div class="absolute inset-0 bg-gray-400"> 
+    <div class="absolute inset-0 bg-gray-400">
         <?php
         // Check if the image array and ID exist before outputting
-        if ( $image && ! empty( $image['id'] ) ) :
+        if ($image && ! empty($image['id'])) :
 
             // Use wp_get_attachment_image for the hero image
             echo wp_get_attachment_image(
@@ -63,7 +63,7 @@ if ( $image ) { // Check if $image exists before trying to access its properties
 
         <?php if ($show_latest_post && !empty($latest_post)) : ?>
             <!-- Enhanced Latest post link - Gray theme -->
-            <div class="absolute bottom-0 lg:bottom-8 right-4 lg:right-6 bg-white rounded-lg shadow-lg overflow-hidden border border-gray-700 w-72 h-auto max-h-28 lg:h-40">
+            <div class="absolute bottom-0 lg:bottom-8 right-4 lg:right-6 bg-white rounded-lg shadow-lg border border-gray-700 w-72 h-auto max-h-36 lg:h-auto lg:max-h-40">
                 <a href="<?= get_permalink($latest_post[0]->ID); ?>" class="block">
                     <div class="bg-gray-700 px-4 py-2 flex items-center justify-between">
                         <span class="text-white font-bold">AKTUELLT</span>
@@ -76,9 +76,9 @@ if ( $image ) { // Check if $image exists before trying to access its properties
                         $full_title = esc_html($latest_post[0]->post_title);
                         $short_title = wp_trim_words($full_title, 5, '...');
                         ?>
-                        <span class="hidden lg:block text-gray-800 font-bold"><?= $full_title; ?></span>
-                        <span class="block lg:hidden text-gray-800 font-bold"><?= $short_title; ?></span>
-                        <div class="mt-2 hidden lg:flex items-center text-gray-700 font-medium">
+
+                        <span class="block  text-gray-800 font-bold"><?= $short_title; ?></span>
+                        <div class="mt-2 hidden md:flex  items-center text-gray-700 font-medium">
                             <span>Läs mer</span>
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
