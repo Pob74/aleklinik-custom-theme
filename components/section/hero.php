@@ -63,7 +63,7 @@ if ( $image ) { // Check if $image exists before trying to access its properties
 
         <?php if ($show_latest_post && !empty($latest_post)) : ?>
             <!-- Enhanced Latest post link - Gray theme -->
-            <div class="absolute bottom-4 lg:bottom-8  right-4 lg:right-6 bg-white rounded-lg shadow-lg overflow-hidden border border-gray-700 w-72 h-24 lg:h-40">
+            <div class="absolute bottom-0 lg:bottom-8 right-4 lg:right-6 bg-white rounded-lg shadow-lg overflow-hidden border border-gray-700 w-72 h-auto max-h-28 lg:h-40">
                 <a href="<?= get_permalink($latest_post[0]->ID); ?>" class="block">
                     <div class="bg-gray-700 px-4 py-2 flex items-center justify-between">
                         <span class="text-white font-bold">AKTUELLT</span>
@@ -71,9 +71,14 @@ if ( $image ) { // Check if $image exists before trying to access its properties
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
                         </svg>
                     </div>
-                    <div class="p-4">
-                        <span class="block text-gray-800 font-bold"><?= esc_html($latest_post[0]->post_title); ?></span>
-                        <div class="mt-2 flex items-center text-gray-700 font-medium">
+                    <div class="p-4 overflow-y-auto">
+                        <?php
+                        $full_title = esc_html($latest_post[0]->post_title);
+                        $short_title = wp_trim_words($full_title, 5, '...');
+                        ?>
+                        <span class="hidden lg:block text-gray-800 font-bold"><?= $full_title; ?></span>
+                        <span class="block lg:hidden text-gray-800 font-bold"><?= $short_title; ?></span>
+                        <div class="mt-2 hidden lg:flex items-center text-gray-700 font-medium">
                             <span>Läs mer</span>
                             <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
